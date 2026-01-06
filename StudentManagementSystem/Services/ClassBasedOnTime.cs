@@ -5,28 +5,45 @@ using System.Text;
 
 namespace StudentManagementSystem.Services
 {
-    internal class ClassBasedOnTime
+    public delegate void ClassFinderDelegate();
+
+    public static class ClassMonitor
     {
-        public static List<ClassStandard> GetClassesOfStudentsEnrolledInLast10Seconds(List<Student> students)
+        public static void FindClassesEvery10Seconds(List<Student> students)
         {
-            List<ClassStandard> classes = new List<ClassStandard>();
-
-            DateTime now = DateTime.Now;
-
-            foreach (Student s in students)
+            while (true)
             {
-                TimeSpan diff = now - s.GetEnrollmentTime();
-
-                if (diff.TotalSeconds <= 10)
+                lock (students)
                 {
-                    if (!classes.Contains(s.ClassObj))
+                    if (students.Count == 0)
                     {
-                        classes.Add(s.ClassObj);
+                        Console.WriteLine("\n No students available.");
+                    }
+                    else
+                    {
+                        List<ClassStandard> classes = new List<ClassStandard>();
+
+                        foreach (Student s in students)
+                        {
+                            ClassStandard cls = s.GetClass();
+
+                            if (!classes.Contains(cls))
+                            {
+                                classes.Add(cls);
+                            }
+                        }
+
+                        Console.WriteLine("\nUpdated Classes having students:");
+                        foreach (ClassStandard c in classes)
+                        {
+                            Console.WriteLine(c);
+                        }
                     }
                 }
-            }
 
-            return classes;
+                Thread.Sleep(20000); // 20 seconds
+            }
         }
     }
+
 }

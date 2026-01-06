@@ -25,12 +25,12 @@ class Program
         "Rahul", "Kumar", "Sharma", 18,
         ClassStandard.Class10,
         addresses[0],
-        new List<string> { "Cricket", "Reading" },
-        new Dictionary<string, int>
+        new List<string> { "Cricket", "Music" },
+        new Dictionary<Subject, int>
         {
-            { "Maths", 88 },
-            { "Science", 92 },
-            { "English", 81 }
+            { Subject.Maths, 88 },
+            { Subject.Science, 92 },
+            { Subject.English, 81 }
         }
     ),
 
@@ -39,11 +39,11 @@ class Program
         ClassStandard.Class9,
         addresses[1],
         new List<string> { "Painting", "Music" },
-        new Dictionary<string, int>
+        new Dictionary<Subject, int>
         {
-            { "Maths", 76 },
-            { "Science", 85 },
-            { "Social Studies", 79 }
+            { Subject.Maths, 76 },
+            { Subject.Science, 85 },
+            { Subject.SocialStudies, 79 }
         }
     ),
 
@@ -52,11 +52,11 @@ class Program
         ClassStandard.Class11,
         addresses[2],
         new List<string> { "Chess", "Coding" },
-        new Dictionary<string, int>
+        new Dictionary<Subject, int>
         {
-            { "Physics", 90 },
-            { "Chemistry", 87 },
-            { "Maths", 93 }
+            { Subject.Physics, 90 },
+            { Subject.Chemistry, 87 },
+            { Subject.Maths, 93 }
         }
     ),
 
@@ -65,24 +65,24 @@ class Program
         ClassStandard.Class10,
         addresses[3],
         new List<string> { "Dancing", "Yoga" },
-        new Dictionary<string, int>
+        new Dictionary<Subject, int>
         {
-            { "Maths", 82 },
-            { "Biology", 88 },
-            { "English", 80 }
+            { Subject.Maths, 82 },
+            { Subject.Biology, 88 },
+            { Subject.English, 80 }
         }
     ),
 
     new Student(
         "Rohan", "Deepak", "Patil", 20,
-        ClassStandard.Class12,
+        ClassStandard.Class10,
         addresses[4],
         new List<string> { "Gym", "Running" },
-        new Dictionary<string, int>
+        new Dictionary<Subject, int>
         {
-            { "Physics", 91 },
-            { "Chemistry", 89 },
-            { "Maths", 94 }
+            { Subject.Physics, 91 },
+            { Subject.Chemistry, 89 },
+            { Subject.Maths, 94 }
         }
     ),
 
@@ -91,37 +91,37 @@ class Program
         ClassStandard.Class9,
         addresses[5],
         new List<string> { "Writing", "Sketching" },
-        new Dictionary<string, int>
+        new Dictionary<Subject, int>
         {
-            { "Maths", 73 },
-            { "Science", 78 },
-            { "English", 75 }
+            { Subject.Maths, 73 },
+            { Subject.Science, 78 },
+            { Subject.English, 75 }
         }
     ),
 
     new Student(
         "Karan", "Ajay", "Malhotra", 21,
-        ClassStandard.Class12,
+        ClassStandard.Class11,
         addresses[6],
         new List<string> { "Photography", "Travel" },
-        new Dictionary<string, int>
+        new Dictionary<Subject, int>
         {
-            { "Accountancy", 86 },
-            { "Business Studies", 90 },
-            { "Economics", 88 }
+            { Subject.Science, 86 },
+            { Subject.English, 90 },
+            { Subject.Hindi, 88 }
         }
     ),
 
     new Student(
-        "Neha", null, "Gupta", 18,
+        "karan", null, "Gupta", 18,
         ClassStandard.Class11,
         addresses[7],
         new List<string> { "Singing", "Blogging" },
-        new Dictionary<string, int>
+        new Dictionary<Subject, int>
         {
-            { "History", 84 },
-            { "Geography", 80 },
-            { "Civics", 82 }
+            { Subject.English, 84 },
+            { Subject.Maths, 80 },
+            { Subject.SocialStudies, 82 }
         }
     ),
 
@@ -130,11 +130,11 @@ class Program
         ClassStandard.Class11,
         addresses[8],
         new List<string> { "Swimming", "Badminton" },
-        new Dictionary<string, int>
+        new Dictionary<Subject, int>
         {
-            { "Physics", 88 },
-            { "Chemistry", 85 },
-            { "Biology", 90 }
+            { Subject.Physics, 88 },
+            { Subject.Chemistry, 85 },
+            { Subject.Biology, 90 }
         }
     ),
 
@@ -143,123 +143,153 @@ class Program
         ClassStandard.Class9,
         addresses[9],
         new List<string> { "Calligraphy", "Craft" },
-        new Dictionary<string, int>
+        new Dictionary<Subject, int>
         {
-            { "Maths", 91 },
-            { "Science", 89 },
-            { "Computer", 95 }
+            { Subject.Maths, 91 },
+            { Subject.Science, 89 },
+            { Subject.ComputerScience, 95 }
         }
     )
 };
 
 
+        int choice=0;
+        bool loopChoice = true;
 
-        int choice;
-        bool loopChoice = true ;    
+
         do
         {
-            Console.WriteLine(@"------------MENU : ------------
-             1. Add Students
-             2. Get All Student Details
-             3. Filter Students based on 
-             4. Students whose age is between 15 to 25
-             5. Topper of Class Details
-             6. Nth position in topper list
-             7. Find all Class where students belong to 10 secs 
-             Press Any other number...");
-            while (true)
+            try
             {
+                Console.WriteLine(@"------------MENU : ------------
+1. Add Students
+2. Get All Student Details
+3. Filter Students based on
+4. Students whose age is between 15 to 25
+5. Topper of Class Details
+6. Nth position in topper list
+7. Find all Class where students belong to 10 secs");
+
                 Console.Write("\nEnter your choice: ");
                 int.TryParse(Console.ReadLine(), out choice);
-                break;
-            }
 
-            switch (choice)
-            {
-                case 1:
-                    Student s1 = new Student();
-                    s1.GetDetails();
-                    students.Add(s1);
-                    break;
+                switch (choice)
+                {
+                    case 1:
+                       
+                            Student s1 = new Student();
 
-                case 2:
-                   
-                    foreach (Student s in students)
-                    {
-                        Console.WriteLine(s.GetFirstName());
-                    }   
-                    break;
+                        try
+                        {
+                            Thread t1 = new Thread(s1.ReadStudentDetailsFromConsole);
 
-                case 3:
-                    Console.WriteLine(@"------------FILTERATION MENU : ------------
-        1.First Name
-        2.Middle Name
-        3.Last Name
-        4.Age
-        5.Roll Number
-        6.Class
-        7.Subjects
-        8.Hobby
-        9.City/State
-        10.Enrollment Date/Time");
-                    int c;
-                    int.TryParse(Console.ReadLine(),out c );
-                    FilterStudents.Filter(students ,c);
-                    break;
 
-                case 4:
-                    List<Student> AgeRange = FilterStudents.AgeRange(students);
-                    foreach (Student s in AgeRange)
-                        s.ShowDetails();
-                    break;
+                            t1.Start();
 
-                case 5:
+                            students.Add(s1);
+                            t1.Join();
 
-                    Rankings.Ranks(students);
-                    
-                    break;
-
-                case 6:
-                    int rank;
-                    Console.WriteLine("Enter the Rank ?");
-                    if (int.TryParse(Console.ReadLine(), out rank))
-                        Rankings.Ranks(students, rank);
-                    else
-                        Console.WriteLine("Invalid Input");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Failed to add student: " + ex.Message);
+                        }
                         break;
 
-                case 7:
-                    List<ClassStandard> recentClasses =
-    ClassBasedOnTime.GetClassesOfStudentsEnrolledInLast10Seconds(students);
-
-                    if (recentClasses.Count == 0)
-                    {
-                        Console.WriteLine("No students enrolled in last 10 seconds.");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Classes with students enrolled in last 10 seconds:");
-                        foreach (ClassStandard cls in recentClasses)
+                    case 2:
+                        try
                         {
-                            Console.WriteLine(cls);
+                            foreach (Student s in students)
+                              s.ShowDetails();
                         }
-                    }
-                    break;
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Error displaying students: " + ex.Message);
+                        }
+                        break;
 
+                    case 3:
+                        try
+                        {
+                            FilterStudents.Filter(students)
+;                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Filter error: " + ex.Message);
+                        }
+                        break;
 
-                default:
-                    Console.WriteLine("bye bye");
-                    loopChoice = false;
-                    break;
+                    case 4:
+                        try
+                        {
+                            List<Student> AgeRange = FilterStudents.AgeRange(students, 15, 25);
+                            foreach (Student s in AgeRange)
+                                s.ShowDetails();
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Age filter error: " + ex.Message);
+                        }
+                        break;
 
+                    case 5:
+                        try
+                        {
+                            Rankings.ShowRank(students);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Ranking error: " + ex.Message);
+                        }
+                        break;
+
+                    case 6:
+                        try
+                        {
+                            int rank;
+                            Console.WriteLine("Enter the Rank ?");
+                            if (int.TryParse(Console.ReadLine(), out rank))
+                                Rankings.ShowRank(students, rank);
+                            else
+                                Console.WriteLine("Invalid Input");
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Rank error: " + ex.Message);
+                        }
+                        break;
+
+                    case 7:
+                        try
+                        {
+                            ClassFinderDelegate del =
+                             () => ClassMonitor.FindClassesEvery10Seconds(students);
+
+                            
+                            Thread thread = new Thread(new ThreadStart(del));
+                            thread.IsBackground = true;
+                            thread.Start();
+
+                        
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Time-based query error: " + ex.Message);
+                        }
+                        break;
+
+                    default:
+                        Console.WriteLine("bye bye");
+                        loopChoice = false;
+                        break;
+                }
             }
-            Console.WriteLine("At the end of loop"+ choice);
-        } while (choice == 0 || choice < 8 );
-     
+            catch (Exception ex)
+            {
+                Console.WriteLine("Menu execution error: " + ex.Message);
+            }
 
+        } while (choice == 0 || choice < 8);
     }
 
-    
-    
 }
-
