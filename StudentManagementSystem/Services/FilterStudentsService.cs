@@ -141,17 +141,20 @@ namespace StudentManagementSystem.Services
             return result;
         }
 
-        public static List<Student> BasedOnEnrollmentTime(List<Student> students, int seconds)
+        public static List<Student> BasedOnEnrollmentTime(
+    List<Student> students, DateTime date)
         {
             List<Student> result = new List<Student>();
-            DateTime limit = DateTime.Now.AddSeconds(-seconds);
 
             foreach (Student s in students)
-                if (s.GetEnrollmentTime >= limit)
+            {
+                if (s.GetEnrollmentTime.Date == date.Date)
                     result.Add(s);
+            }
 
             return result;
         }
+
 
         public static List<Student> BasedOnMultipleSubjects(List<Student> students, List<Subject> selectedSubjects)
         {
@@ -187,7 +190,7 @@ namespace StudentManagementSystem.Services
             Console.WriteLine("5. Filter by Hobby");
             Console.WriteLine("6. Filter by Address");
             Console.WriteLine("7. Filter by Class");
-            Console.WriteLine("8. Filter by Enrollment Time");
+            Console.WriteLine("8. Filter by Enrollment Date");
             Console.WriteLine("9. Back to Main Menu");
             Console.Write("Enter choice: ");
 
@@ -233,7 +236,26 @@ namespace StudentManagementSystem.Services
                     break;
 
                 case 8:
-                    filtered = BasedOnEnrollmentTime(students, ReadPositiveInt("Enter time in seconds: "));
+                    Console.WriteLine("Enter Enrollment Date (dd-MM-yyyy):");
+
+                    filtered = new List<Student>();
+                    DateTime inputDate;
+
+                    while (true)
+                    {
+                        if (DateTime.TryParseExact(
+                            Console.ReadLine(),
+                            "dd-MM-yyyy",
+                            null,
+                            System.Globalization.DateTimeStyles.None,
+                            out inputDate))
+                        {
+                            filtered = BasedOnEnrollmentTime(students, inputDate);
+                            break;
+                        }
+
+                        Console.WriteLine("Invalid format. Use dd-MM-yyyy");
+                    }
                     break;
 
                 case 9:
