@@ -2,61 +2,111 @@
 using StudentManagementSystem.Models;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace StudentManagementSystem.Services
 {
     internal static class FilterStudentsService
     {
+      
+        private static string ReadValidatedName(string message)
+        {
+            while (true)
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
 
-        public static List<Student> AgeRange(List<Student> students , int min , int max)
+                if (!string.IsNullOrWhiteSpace(input) &&
+                    Regex.IsMatch(input, @"^[A-Za-z ]+$"))
+                    return input.Trim();
+
+                Console.WriteLine("Only letters and spaces allowed.");
+            }
+        }
+
+        private static string ReadValidatedAddressText(string message)
+        {
+            while (true)
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+
+                if (!string.IsNullOrWhiteSpace(input) &&
+                    Regex.IsMatch(input, @"^[A-Za-z0-9]+([\s-]+[A-Za-z0-9]+)*$"))
+                    return input.Trim();
+
+                Console.WriteLine("Invalid address format.");
+            }
+        }
+
+        private static int ReadValidatedPincode()
+        {
+            while (true)
+            {
+                Console.Write("Enter Pincode: ");
+                if (int.TryParse(Console.ReadLine(), out int pin) &&
+                    pin >= 100000 && pin <= 999999)
+                    return pin;
+
+                Console.WriteLine("Pincode must be exactly 6 digits.");
+            }
+        }
+
+        private static int ReadPositiveInt(string message)
+        {
+            while (true)
+            {
+                Console.Write(message);
+                if (int.TryParse(Console.ReadLine(), out int value) && value > 0)
+                    return value;
+
+                Console.WriteLine("Enter a positive number.");
+            }
+        }
+
+        public static List<Student> AgeRange(List<Student> students, int min, int max)
         {
             List<Student> result = new List<Student>();
 
             foreach (Student s in students)
             {
-                if (s.GetAge > min && s.GetAge < max)
+                if (s.GetAge >= min && s.GetAge <= max)
                     result.Add(s);
             }
 
             return result;
         }
 
-        public static List<Student> BasedOnFirstName(List<Student> students, string findName)
+        public static List<Student> BasedOnFirstName(List<Student> students, string name)
         {
             List<Student> result = new List<Student>();
 
             foreach (Student s in students)
-            {
-                if (string.Equals(s.GetFirstName, findName, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(s.GetFirstName, name, StringComparison.OrdinalIgnoreCase))
                     result.Add(s);
-            }
 
             return result;
         }
 
-        public static List<Student> BasedOnMiddleName(List<Student> students, string findName)
+        public static List<Student> BasedOnMiddleName(List<Student> students, string name)
         {
             List<Student> result = new List<Student>();
 
             foreach (Student s in students)
-            {
                 if (!string.IsNullOrWhiteSpace(s.GetMiddleName) &&
-                    string.Equals(s.GetMiddleName, findName, StringComparison.OrdinalIgnoreCase))
+                    string.Equals(s.GetMiddleName, name, StringComparison.OrdinalIgnoreCase))
                     result.Add(s);
-            }
 
             return result;
         }
 
-        public static List<Student> BasedOnLastName(List<Student> students, string findName)
+        public static List<Student> BasedOnLastName(List<Student> students, string name)
         {
             List<Student> result = new List<Student>();
 
             foreach (Student s in students)
-            {
-                if (string.Equals(s.GetLastName, findName, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(s.GetLastName, name, StringComparison.OrdinalIgnoreCase))
                     result.Add(s);
-            }
 
             return result;
         }
@@ -85,10 +135,8 @@ namespace StudentManagementSystem.Services
             List<Student> result = new List<Student>();
 
             foreach (Student s in students)
-            {
                 if (s.GetClass == cls)
                     result.Add(s);
-            }
 
             return result;
         }
@@ -99,42 +147,30 @@ namespace StudentManagementSystem.Services
             DateTime limit = DateTime.Now.AddSeconds(-seconds);
 
             foreach (Student s in students)
-            {
                 if (s.GetEnrollmentTime >= limit)
                     result.Add(s);
-            }
 
             return result;
         }
+
         public static List<Student> BasedOnMultipleSubjects(List<Student> students, List<Subject> selectedSubjects)
         {
             List<Student> result = new List<Student>();
 
             foreach (Student s in students)
             {
-                bool hasAllSubjects = true;
+                bool hasAll = true;
 
                 foreach (Subject sub in selectedSubjects)
                 {
-                    bool found = false;
-
-                    foreach (Subject studentSub in s.GetSubjects)
+                    if (!s.GetSubjects.Contains(sub))
                     {
-                        if (studentSub == sub)
-                        {
-                            found = true;
-                            break;
-                        }
-                    }
-
-                    if (!found)
-                    {
-                        hasAllSubjects = false;
+                        hasAll = false;
                         break;
                     }
                 }
 
-                if (hasAllSubjects)
+                if (hasAll)
                     result.Add(s);
             }
 
@@ -143,12 +179,7 @@ namespace StudentManagementSystem.Services
 
         public static void Filter(List<Student> students)
         {
-            List<Student> filtered;
-            int choice;
-
-            Console.WriteLine("=========================================");
-            Console.WriteLine("          STUDENT FILTER MENU");
-            Console.WriteLine("=========================================");
+            Console.WriteLine("\n========== STUDENT FILTER MENU ==========");
             Console.WriteLine("1. Filter by First Name");
             Console.WriteLine("2. Filter by Middle Name");
             Console.WriteLine("3. Filter by Last Name");
@@ -158,152 +189,109 @@ namespace StudentManagementSystem.Services
             Console.WriteLine("7. Filter by Class");
             Console.WriteLine("8. Filter by Enrollment Time");
             Console.WriteLine("9. Back to Main Menu");
-            Console.WriteLine("=========================================");
-            Console.Write("\nEnter your choice: ");
-            if (int.TryParse(Console.ReadLine(), out choice))
+            Console.Write("Enter choice: ");
+
+            if (!int.TryParse(Console.ReadLine(), out int choice))
             {
-
-
-                switch (choice)
-                {
-                    case 1:
-                        Console.Write("Enter First Name: ");
-                        string name = Console.ReadLine();
-                        filtered = BasedOnFirstName(students, name);
-                        Show(filtered);
-                        break;
-
-                    case 2:
-                        Console.Write("Enter Middle Name: ");
-                        filtered = BasedOnMiddleName(students, Console.ReadLine());
-                        Show(filtered);
-                        break;
-
-                    case 3:
-                        Console.Write("Enter Last Name: ");
-                        filtered = BasedOnLastName(students, Console.ReadLine());
-                        Show(filtered);
-                        break;
-
-                    case 4:
-                        List<Subject> subject = SelectMultipleSubjects();
-                        filtered = BasedOnMultipleSubjects(students, subject);
-                        Show(filtered);
-                        break;
-
-                    case 5:
-                        Console.Write("Enter Hobby: ");
-                        filtered = BasedOnHobby(students, Console.ReadLine());
-                        Show(filtered);
-                        break;
-
-                    case 6:
-                        filtered = BasedOnAddress(students);
-                        Show(filtered);
-                        break;
-
-                    case 7:
-                        ClassStandard cls = SelectClass();
-                        filtered = BasedOnClass(students, cls);
-                        Show(filtered);
-                        break;
-
-                    case 8:
-                        filtered = BasedOnEnrollmentTime(students, 10);
-                        Show(filtered);
-                        break;
-                    case 9:
-                        break;
-                    default:
-                        Console.WriteLine("Invalid choice.");
-                        break;
-                }
-
+                Console.WriteLine("Invalid choice.");
+                return;
             }
+
+            List<Student> filtered;
+
+            switch (choice)
+            {
+                case 1:
+                    Console.WriteLine("Enter FirstName ");
+                    filtered = BasedOnFirstName(students, Console.ReadLine().Trim());
+                    break;
+
+                case 2:
+                    Console.WriteLine("Enter MiddleName ");
+                    filtered = BasedOnMiddleName(students, Console.ReadLine().Trim());
+                    break;
+
+                case 3:
+                    Console.WriteLine("Enter LastName ");
+                    filtered = BasedOnLastName(students, Console.ReadLine().Trim());
+                    break;
+
+                case 4:
+                    filtered = BasedOnMultipleSubjects(students, SelectMultipleSubjects());
+                    break;
+
+                case 5:
+                    filtered = BasedOnHobby(students, ReadValidatedName("Enter Hobby: "));
+                    break;
+
+                case 6:
+                    filtered = BasedOnAddress(students);
+                    break;
+
+                case 7:
+                    filtered = BasedOnClass(students, SelectClass());
+                    break;
+
+                case 8:
+                    filtered = BasedOnEnrollmentTime(students, ReadPositiveInt("Enter time in seconds: "));
+                    break;
+
+                case 9:
+                    return;
+
+                default:
+                    Console.WriteLine("Invalid choice.");
+                    return;
+            }
+
+            Show(filtered);
         }
+
         public static List<Student> BasedOnAddress(List<Student> students)
         {
             List<Student> result = new List<Student>();
-            int choice;
 
-            Console.Clear();
-            Console.WriteLine("=================================");
-            Console.WriteLine("        ADDRESS FILTER MENU");
-            Console.WriteLine("=================================");
-            Console.WriteLine("1. Filter by City");
-            Console.WriteLine("2. Filter by Area");
-            Console.WriteLine("3. Filter by State");
-            Console.WriteLine("4. Filter by Pincode");
-            Console.WriteLine("=================================");
-            Console.Write("Enter your choice: ");
+            Console.WriteLine("\nADDRESS FILTER MENU");
+            Console.WriteLine("1. City");
+            Console.WriteLine("2. Area");
+            Console.WriteLine("3. State");
+            Console.WriteLine("4. Pincode");
+            Console.Write("Enter choice: ");
 
-            if (!int.TryParse(Console.ReadLine(), out choice))
+            if (!int.TryParse(Console.ReadLine(), out int choice))
                 return result;
 
             switch (choice)
             {
                 case 1:
-                    Console.Write("Enter City: ");
-                    string city = Console.ReadLine();
-
+                    string city = ReadValidatedName("Enter City: ");
                     foreach (Student s in students)
-                    {
                         if (s.GetAddress != null &&
                             string.Equals(s.GetAddress.GetCity, city, StringComparison.OrdinalIgnoreCase))
-                        {
                             result.Add(s);
-                        }
-                    }
                     break;
 
                 case 2:
-                    Console.Write("Enter Area: ");
-                    string area = Console.ReadLine();
-
+                    string area = ReadValidatedAddressText("Enter Area: ");
                     foreach (Student s in students)
-                    {
                         if (s.GetAddress != null &&
                             string.Equals(s.GetAddress.GetArea, area, StringComparison.OrdinalIgnoreCase))
-                        {
                             result.Add(s);
-                        }
-                    }
                     break;
 
                 case 3:
-                    Console.Write("Enter State: ");
-                    string state = Console.ReadLine();
-
+                    string state = ReadValidatedName("Enter State: ");
                     foreach (Student s in students)
-                    {
                         if (s.GetAddress != null &&
                             string.Equals(s.GetAddress.GetState, state, StringComparison.OrdinalIgnoreCase))
-                        {
                             result.Add(s);
-                        }
-                    }
                     break;
 
                 case 4:
-                    Console.Write("Enter Pincode: ");
-                    if (int.TryParse(Console.ReadLine(), out int pin))
-                    {
-                        foreach (Student s in students)
-                        {
-                            if (s.GetAddress != null && s.GetAddress.GetPincode == pin)
-                            {
-                                result.Add(s);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid pincode.");
-                    }
-                    break;
-
-                default:
-                    Console.WriteLine("Invalid choice.");
+                    int pin = ReadValidatedPincode();
+                    foreach (Student s in students)
+                        if (s.GetAddress != null && s.GetAddress.GetPincode == pin)
+                            result.Add(s);
                     break;
             }
 
@@ -337,74 +325,42 @@ namespace StudentManagementSystem.Services
                 Console.WriteLine("Invalid class. Try again.");
             }
         }
+
         private static List<Subject> SelectMultipleSubjects()
         {
-            while (true) 
+            while (true)
             {
-                List<Subject> selectedSubjects = new List<Subject>();
-                Subject[] allSubjects = (Subject[])Enum.GetValues(typeof(Subject));
+                List<Subject> selected = new List<Subject>();
+                Subject[] all = (Subject[])Enum.GetValues(typeof(Subject));
 
                 Console.WriteLine("\nAvailable Subjects:");
-                for (int i = 0; i < allSubjects.Length; i++)
-                {
-                    Console.WriteLine($"{i + 1}. {allSubjects[i]}");
-                }
+                for (int i = 0; i < all.Length; i++)
+                    Console.WriteLine($"{i + 1}. {all[i]}");
 
-                Console.WriteLine("\nEnter subject numbers separated by comma (e.g. 1,3,4):");
-                string input = Console.ReadLine();
+                Console.Write("Enter subject numbers (comma separated): ");
+                string[] values = Console.ReadLine().Split(',');
 
-                if (string.IsNullOrWhiteSpace(input))
-                {
-                    Console.WriteLine("Input cannot be empty.");
-                    continue;
-                }
-
-                string[] values = input.Split(',');
-                bool isValid = true;
+                bool valid = true;
 
                 foreach (string v in values)
                 {
-                    if (!int.TryParse(v.Trim(), out int index))
+                    if (!int.TryParse(v.Trim(), out int index) ||
+                        index < 1 || index > all.Length)
                     {
-                        Console.WriteLine($"Invalid input: {v}");
-                        isValid = false;
+                        valid = false;
                         break;
                     }
 
-                    if (index < 1 || index > allSubjects.Length)
-                    {
-                        Console.WriteLine($"Invalid subject number: {index}");
-                        isValid = false;
-                        break;
-                    }
-
-                    Subject subject = allSubjects[index - 1];
-
-                    if (selectedSubjects.Contains(subject))
-                    {
-                        Console.WriteLine($"Duplicate subject selected: {subject}");
-                        isValid = false;
-                        break;
-                    }
-
-                    selectedSubjects.Add(subject);
+                    Subject sub = all[index - 1];
+                    if (!selected.Contains(sub))
+                        selected.Add(sub);
                 }
 
-                if (!isValid)
-                {
-                    Console.WriteLine("Please re-enter subjects correctly.\n");
-                    continue;
-                }
+                if (valid && selected.Count > 0)
+                    return selected;
 
-                if (selectedSubjects.Count == 0)
-                {
-                    Console.WriteLine("At least one subject must be selected.");
-                    continue;
-                }
-
-                return selectedSubjects; 
+                Console.WriteLine("Invalid subject selection. Try again.\n");
             }
         }
-
     }
 }
