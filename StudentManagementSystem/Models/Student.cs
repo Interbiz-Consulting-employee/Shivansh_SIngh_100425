@@ -205,6 +205,9 @@ namespace StudentManagementSystem.Models
         private void SetSubjects()
         {
             Console.WriteLine("\nEnter Subjects (Min 1, Max 6)");
+            foreach (Subject sub in Enum.GetValues(typeof(Subject)))
+                Console.WriteLine($"{(int)sub} - {sub}");
+
             while (_subjects.Count < 6)
             {
                 Console.Write($"Subject {_subjects.Count + 1}: ");
@@ -217,8 +220,11 @@ namespace StudentManagementSystem.Models
                     continue;
                 }
 
-                if (Enum.TryParse(input, true, out Subject subject) &&
-                    !_subjects.Contains(subject))
+                if (
+                    Enum.TryParse(input, true, out Subject subject) &&
+                    Enum.IsDefined(typeof(Subject), subject) &&
+                    !_subjects.Contains(subject)
+                )
                 {
                     _subjects.Add(subject);
                 }
@@ -228,6 +234,7 @@ namespace StudentManagementSystem.Models
                 }
             }
         }
+
 
         private void SetSubjectMarks()
         {
@@ -256,7 +263,12 @@ namespace StudentManagementSystem.Models
         public void ShowDetails()
         {
             Console.WriteLine("\n----- STUDENT DETAILS -----");
-            Console.WriteLine($"Name     : {_firstName} {_middleName} {_lastName}");
+            if (string.IsNullOrWhiteSpace(_middleName))
+            {
+                Console.WriteLine($"Name     : {_firstName} {_lastName}");
+            }
+            else
+                Console.WriteLine($"Name     : {_firstName} {_middleName} {_lastName}");
             Console.WriteLine($"Age      : {age}");
             Console.WriteLine($"Class    : {ClassStandard}");
             Console.WriteLine($"Roll No  : {RollNo}");

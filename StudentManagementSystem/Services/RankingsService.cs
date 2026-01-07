@@ -14,7 +14,11 @@ namespace StudentManagementSystem.Services
                 Console.WriteLine("No students available.");
                 return;
             }
-
+            if (rank <= 0 )
+            {
+                Console.WriteLine("Invalid rank.");
+                return;
+            }
             ClassStandard standard;
 
             while (true)
@@ -52,7 +56,7 @@ namespace StudentManagementSystem.Services
                 return;
             }
 
-            if (rank <= 0 || rank > studentsOfClass.Count)
+            if ( rank > studentsOfClass.Count)
             {
                 Console.WriteLine("Invalid rank.");
                 return;

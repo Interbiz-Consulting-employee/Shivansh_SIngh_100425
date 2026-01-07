@@ -8,12 +8,10 @@ namespace StudentManagementSystem.Services
 {
     public static class ClassMonitor
     {
-        private static volatile bool _stopRequested = false;
+        private static bool _stopRequested = false;
         private static readonly object _lockObj = new object();
 
-        public static void FindClassesEveryInterval(
-            List<Student> students,
-            int intervalSeconds = 10)
+        public static void FindClassesEveryInterval( List<Student> students, int intervalSeconds = 10)
         {
             if (students == null)
             {
@@ -58,7 +56,7 @@ namespace StudentManagementSystem.Services
                 }
             }
 
-            Console.WriteLine("Class monitoring stopped gracefully.");
+            Console.WriteLine("Class monitoring stopped ");
         }
         public static void Stop()
         {

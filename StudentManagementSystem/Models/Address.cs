@@ -34,9 +34,9 @@ namespace StudentManagementSystem.Models
 
             _blockNo = ReadPositiveInt("Enter Block No: ");
             _streetNo = ReadPositiveInt("Enter Street No: ");
-            _area = ReadText("Enter Area: ");
-            _city = ReadText("Enter City: ");
-            _state = ReadText("Enter State: ");
+            _area = ReadText1("Enter Area: ");
+            _city = ReadText1("Enter City: ");
+            _state = ReadText2("Enter State: ");
             _pincode = ReadPincode("Enter Pincode: ");
 
             ValidateAddress();
@@ -70,7 +70,14 @@ namespace StudentManagementSystem.Models
         private bool IsValidText(string input)
         {
             return !string.IsNullOrWhiteSpace(input) &&
-                   Regex.IsMatch(input, @"^[A-Za-z ]+$");
+                   Regex.IsMatch(input, @"^[A-Za-z0-9]+([\s-]+[A-Za-z0-9]+)*$")
+;
+        }
+        private bool IsValidText2(string input)
+        {
+            return !string.IsNullOrWhiteSpace(input) &&
+                   Regex.IsMatch(input, @"^[A-Za-z ]+$")
+;
         }
 
         private int ReadPositiveInt(string message)
@@ -84,8 +91,7 @@ namespace StudentManagementSystem.Models
                 Console.WriteLine("Enter a positive number.");
             }
         }
-
-        private string ReadText(string message)
+        private string ReadText1(string message)
         {
             while (true)
             {
@@ -95,7 +101,20 @@ namespace StudentManagementSystem.Models
                 if (IsValidText(input))
                     return input.Trim();
 
-                Console.WriteLine("Only letters and spaces allowed.");
+                Console.WriteLine("put valid name");
+            }
+        }
+        private string ReadText2(string message)
+        {
+            while (true)
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+
+                if (IsValidText2(input))
+                    return input.Trim();
+
+                Console.WriteLine("put valid name");
             }
         }
 
