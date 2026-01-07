@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace StudentManagementSystem.Models
+namespace StudentManagementSystem.Enums
 {
     public enum Subject
     {

@@ -1,10 +1,11 @@
-﻿using StudentManagementSystem.Models;
+﻿using StudentManagementSystem.Enums;
+using StudentManagementSystem.Models;
 using System;
 using System.Collections.Generic;
 
 namespace StudentManagementSystem.Services
 {
-    internal static class FilterStudents
+    internal static class FilterStudentsService
     {
 
         public static List<Student> AgeRange(List<Student> students , int min , int max)
@@ -13,7 +14,7 @@ namespace StudentManagementSystem.Services
 
             foreach (Student s in students)
             {
-                if (s.GetAge() > min && s.GetAge() < max)
+                if (s.GetAge > min && s.GetAge < max)
                     result.Add(s);
             }
 
@@ -26,7 +27,7 @@ namespace StudentManagementSystem.Services
 
             foreach (Student s in students)
             {
-                if (string.Equals(s.GetFirstName(), findName, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(s.GetFirstName, findName, StringComparison.OrdinalIgnoreCase))
                     result.Add(s);
             }
 
@@ -39,8 +40,8 @@ namespace StudentManagementSystem.Services
 
             foreach (Student s in students)
             {
-                if (!string.IsNullOrWhiteSpace(s.GetMiddleName()) &&
-                    string.Equals(s.GetMiddleName(), findName, StringComparison.OrdinalIgnoreCase))
+                if (!string.IsNullOrWhiteSpace(s.GetMiddleName) &&
+                    string.Equals(s.GetMiddleName, findName, StringComparison.OrdinalIgnoreCase))
                     result.Add(s);
             }
 
@@ -53,7 +54,7 @@ namespace StudentManagementSystem.Services
 
             foreach (Student s in students)
             {
-                if (string.Equals(s.GetLastName(), findName, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(s.GetLastName, findName, StringComparison.OrdinalIgnoreCase))
                     result.Add(s);
             }
 
@@ -66,7 +67,7 @@ namespace StudentManagementSystem.Services
 
             foreach (Student s in students)
             {
-                foreach (string h in s.GetHobbies())
+                foreach (string h in s.GetHobbies)
                 {
                     if (string.Equals(h, hobby, StringComparison.OrdinalIgnoreCase))
                     {
@@ -85,7 +86,7 @@ namespace StudentManagementSystem.Services
 
             foreach (Student s in students)
             {
-                if (s.GetClass() == cls)
+                if (s.GetClass == cls)
                     result.Add(s);
             }
 
@@ -99,7 +100,7 @@ namespace StudentManagementSystem.Services
 
             foreach (Student s in students)
             {
-                if (s.GetEnrollmentTime() >= limit)
+                if (s.GetEnrollmentTime >= limit)
                     result.Add(s);
             }
 
@@ -117,7 +118,7 @@ namespace StudentManagementSystem.Services
                 {
                     bool found = false;
 
-                    foreach (Subject studentSub in s.GetSubjects())
+                    foreach (Subject studentSub in s.GetSubjects)
                     {
                         if (studentSub == sub)
                         {
@@ -248,7 +249,7 @@ namespace StudentManagementSystem.Services
                     foreach (Student s in students)
                     {
                         if (s.GetAddress != null &&
-                            string.Equals(s.GetAddress.GetCity(), city, StringComparison.OrdinalIgnoreCase))
+                            string.Equals(s.GetAddress.GetCity, city, StringComparison.OrdinalIgnoreCase))
                         {
                             result.Add(s);
                         }
@@ -262,7 +263,7 @@ namespace StudentManagementSystem.Services
                     foreach (Student s in students)
                     {
                         if (s.GetAddress != null &&
-                            string.Equals(s.GetAddress.GetArea(), area, StringComparison.OrdinalIgnoreCase))
+                            string.Equals(s.GetAddress.GetArea, area, StringComparison.OrdinalIgnoreCase))
                         {
                             result.Add(s);
                         }
@@ -276,7 +277,7 @@ namespace StudentManagementSystem.Services
                     foreach (Student s in students)
                     {
                         if (s.GetAddress != null &&
-                            string.Equals(s.GetAddress.GetState(), state, StringComparison.OrdinalIgnoreCase))
+                            string.Equals(s.GetAddress.GetState, state, StringComparison.OrdinalIgnoreCase))
                         {
                             result.Add(s);
                         }
@@ -289,7 +290,7 @@ namespace StudentManagementSystem.Services
                     {
                         foreach (Student s in students)
                         {
-                            if (s.GetAddress != null && s.GetAddress.GetPincode() == pin)
+                            if (s.GetAddress != null && s.GetAddress.GetPincode == pin)
                             {
                                 result.Add(s);
                             }
@@ -338,30 +339,72 @@ namespace StudentManagementSystem.Services
         }
         private static List<Subject> SelectMultipleSubjects()
         {
-            List<Subject> selectedSubjects = new List<Subject>();
-
-            Console.WriteLine("\nAvailable Subjects:");
-            foreach (Subject sub in Enum.GetValues(typeof(Subject)))
-                Console.WriteLine($"{(int)sub} - {sub}");
-
-            Console.WriteLine("\nEnter subject numbers separated by comma (e.g. 1,3,4):");
-            string input = Console.ReadLine();
-
-            string[] values = input.Split(',');
-
-            foreach (string v in values)
+            while (true) 
             {
-                if (int.TryParse(v.Trim(), out int num) &&
-                    Enum.IsDefined(typeof(Subject), num))
+                List<Subject> selectedSubjects = new List<Subject>();
+                Subject[] allSubjects = (Subject[])Enum.GetValues(typeof(Subject));
+
+                Console.WriteLine("\nAvailable Subjects:");
+                for (int i = 0; i < allSubjects.Length; i++)
                 {
-                    Subject subject = (Subject)num;
-
-                    if (!selectedSubjects.Contains(subject))
-                        selectedSubjects.Add(subject);
+                    Console.WriteLine($"{i + 1}. {allSubjects[i]}");
                 }
-            }
 
-            return selectedSubjects;
+                Console.WriteLine("\nEnter subject numbers separated by comma (e.g. 1,3,4):");
+                string input = Console.ReadLine();
+
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    Console.WriteLine("Input cannot be empty.");
+                    continue;
+                }
+
+                string[] values = input.Split(',');
+                bool isValid = true;
+
+                foreach (string v in values)
+                {
+                    if (!int.TryParse(v.Trim(), out int index))
+                    {
+                        Console.WriteLine($"Invalid input: {v}");
+                        isValid = false;
+                        break;
+                    }
+
+                    if (index < 1 || index > allSubjects.Length)
+                    {
+                        Console.WriteLine($"Invalid subject number: {index}");
+                        isValid = false;
+                        break;
+                    }
+
+                    Subject subject = allSubjects[index - 1];
+
+                    if (selectedSubjects.Contains(subject))
+                    {
+                        Console.WriteLine($"Duplicate subject selected: {subject}");
+                        isValid = false;
+                        break;
+                    }
+
+                    selectedSubjects.Add(subject);
+                }
+
+                if (!isValid)
+                {
+                    Console.WriteLine("Please re-enter subjects correctly.\n");
+                    continue;
+                }
+
+                if (selectedSubjects.Count == 0)
+                {
+                    Console.WriteLine("At least one subject must be selected.");
+                    continue;
+                }
+
+                return selectedSubjects; 
+            }
         }
+
     }
 }

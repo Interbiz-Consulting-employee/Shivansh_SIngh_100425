@@ -1,12 +1,11 @@
-﻿
-
+﻿using StudentManagementSystem.Enums;
 using StudentManagementSystem.Models;
 using System;
 using System.Collections.Generic;
 
 namespace StudentManagementSystem.Services
 {
-    internal static class Rankings
+    internal static class RankingsService
     {
         public static void ShowRank(this List<Student> students, int rank = 1)
         {
@@ -41,10 +40,16 @@ namespace StudentManagementSystem.Services
 
             foreach (Student s in students)
             {
-                if (standard == s.GetClass())
+                if (s.GetClass == standard)
                 {
                     studentsOfClass.Add(s);
                 }
+            }
+
+            if (studentsOfClass.Count == 0)
+            {
+                Console.WriteLine("No students found in selected class.");
+                return;
             }
 
             if (rank <= 0 || rank > studentsOfClass.Count)
@@ -56,14 +61,18 @@ namespace StudentManagementSystem.Services
             studentsOfClass.Sort((s1, s2) =>
                 s2.GetPercentage().CompareTo(s1.GetPercentage()));
 
-           Console.WriteLine($" Rank {rank} in class {standard} : {studentsOfClass[rank - 1].GetRollNo}");
+            Student rankedStudent = studentsOfClass[rank - 1];
 
-            Console.WriteLine("Want to check full details press y ");
-            if(Console.ReadLine() == "y")
-            studentsOfClass[rank - 1].ShowDetails();
-                    
+            Console.WriteLine(
+                $"Rank {rank} in class {standard} : Roll No {rankedStudent.GetRollNo}");
+
+            Console.WriteLine("Want to check full details? Press Y");
+            string choice = Console.ReadLine();
+
+            if (choice?.Trim().ToLower() == "y")
+            {
+                rankedStudent.ShowDetails();
+            }
         }
     }
-
 }
-

@@ -1,13 +1,15 @@
-﻿using System;
+﻿using StudentManagementSystem.Enums;
+using StudentManagementSystem.Exceptions;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace StudentManagementSystem.Models
 {
     public class Student
     {
-        private static Dictionary<ClassStandard, int> rollCount =
+       // Static Field for Count RollNumber
+        private static Dictionary<ClassStandard, int> _rollCount =
             new Dictionary<ClassStandard, int>
             {
                 { ClassStandard.Class9, 9000 },
@@ -16,106 +18,127 @@ namespace StudentManagementSystem.Models
                 { ClassStandard.Class12, 12000 }
             };
 
-        private string firstName;
-        private string middleName;
-        private string lastName;
-        private int age;
-
-        private List<string> hobbies = new List<string>();
-        private int totalMarks;
-
-        private int RollNo;
-        private ClassStandard ClassStandard;
-
-        private Address address = new Address();
-        private List<Subject> subjects = new List<Subject>();
-        private Dictionary<Subject, int> subjectMarks = new Dictionary<Subject, int>();
-        private DateTime studentEnrollmentTime;
-
         private static readonly object _rollLock = new object();
 
+        
+        private static readonly List<Student> _studentRegistry = new List<Student>();
+        private static readonly object _studentLock = new object();
+
+        // Instance Fields
+        private string _firstName;
+        private string _middleName;
+        private string _lastName;
+        private int age;
+        private int RollNo;
+        private ClassStandard ClassStandard;
+        private Address _address = new Address();
+
+        private List<string> _hobbies = new List<string>();
+        private List<Subject> _subjects = new List<Subject>();
+        private Dictionary<Subject, int> subjectMarks = new Dictionary<Subject, int>();
+
+        private int _totalMarks;
+        private DateTime studentEnrollmentTime;
+
+        // constructor
         public Student() { }
 
         public Student(
-            string firstName,
-            string middleName,
-            string lastName,
+            string _firstName,
+            string _middleName,
+            string _lastName,
             int age,
-            ClassStandard ClassStandard,
-            Address address,
-            List<string> hobbies,
-            Dictionary<Subject, int> subjectMarksInput)
+            ClassStandard _classStandard,
+            Address _address,
+            List<string> _hobbies,
+            Dictionary<Subject, int> _subjectMarksInput)
         {
-            try
+            // Basic validation
+            if (string.IsNullOrWhiteSpace(_firstName))
+                throw new StudentValidationException("First name is required");
+
+            if (string.IsNullOrWhiteSpace(_lastName))
+                throw new StudentValidationException("Last name is required");
+
+            if (age <= 0 || age > 30)
+                throw new StudentValidationException("Invalid age");
+
+            if (_hobbies == null || _hobbies.Count < 1 || _hobbies.Count > 7)
+                throw new StudentValidationException("Hobbies must be between 1 and 7");
+
+            if (_subjectMarksInput == null || _subjectMarksInput.Count < 1 || _subjectMarksInput.Count > 6)
+                throw new StudentValidationException("Subjects must be between 1 and 6");
+
+            
+            lock (_studentLock)
             {
-                if (string.IsNullOrWhiteSpace(firstName))
-                    throw new ArgumentException("First name is required");
-
-                if (string.IsNullOrWhiteSpace(lastName))
-                    throw new ArgumentException("Last name is required");
-
-                if (age <= 0 || age > 30)
-                    throw new ArgumentException("Invalid age");
-
-                if (hobbies == null || hobbies.Count < 1 || hobbies.Count > 7)
-                    throw new ArgumentException("Hobbies must be between 1 and 7");
-
-                if (subjectMarksInput == null || subjectMarksInput.Count < 1 || subjectMarksInput.Count > 6)
-                    throw new ArgumentException("Subjects must be between 1 and 6");
-
-                this.firstName = firstName.Trim();
-                this.middleName = middleName?.Trim();
-                this.lastName = lastName.Trim();
-                this.age = age;
-                this.ClassStandard = ClassStandard;
-                this.address = address;
-                this.hobbies = hobbies;
-
-                lock (_rollLock)
+                foreach (Student s in _studentRegistry)
                 {
-                    rollCount[ClassStandard]++;
-                    RollNo = rollCount[ClassStandard];
+                    if (s._firstName.Equals(_firstName, StringComparison.OrdinalIgnoreCase) &&
+                        s._lastName.Equals(_lastName, StringComparison.OrdinalIgnoreCase) &&
+                        s.ClassStandard == _classStandard)
+                    {
+                        throw new StudentValidationException("Duplicate student detected");
+                    }
                 }
-
-                foreach (var item in subjectMarksInput)
-                {
-                    if (item.Value < 0 || item.Value > 100)
-                        throw new ArgumentException("Marks must be between 0 and 100");
-
-                    subjects.Add(item.Key);
-                    subjectMarks[item.Key] = item.Value;
-                    totalMarks += item.Value;
-                }
-
-                studentEnrollmentTime = DateTime.Now;
             }
-            catch
+
+            this._firstName = _firstName.Trim();
+            this._middleName = _middleName?.Trim();
+            this._lastName = _lastName.Trim();
+            this.age = age;
+            this.ClassStandard = _classStandard;
+            this._address = _address ?? throw new ArgumentNullException(nameof(_address));
+            this._hobbies = _hobbies;
+
+            //Used lock so that no multiple threads may not access static _rollCount
+            lock (_rollLock)
             {
-                throw;
+                _rollCount[_classStandard]++;
+                RollNo = _rollCount[_classStandard];
+            }
+
+            // Marks validation
+            _totalMarks = 0;
+            foreach (var item in _subjectMarksInput)
+            {
+                if (item.Value < 0 || item.Value > 100)
+                    throw new StudentValidationException("Marks must be between 0 and 100");
+
+                _subjects.Add(item.Key);
+                subjectMarks[item.Key] = item.Value;
+                _totalMarks += item.Value;
+            }
+
+            studentEnrollmentTime = DateTime.Now;
+
+            // Register student
+            lock (_studentLock)
+            {
+                _studentRegistry.Add(this);
             }
         }
 
-        private delegate void SubjectWorkflowDelegate();
-        private SubjectWorkflowDelegate subjectWorkflow;
+        // Input
         public void ReadStudentDetailsFromConsole()
         {
             try
             {
                 Console.Write("Enter First Name: ");
-                firstName = Console.ReadLine();
+                _firstName = Console.ReadLine()?.Trim();
 
                 Console.Write("Enter Middle Name: ");
-                middleName = Console.ReadLine();
+                _middleName = Console.ReadLine()?.Trim();
 
                 Console.Write("Enter Last Name: ");
-                lastName = Console.ReadLine();
+                _lastName = Console.ReadLine()?.Trim();
 
                 while (true)
                 {
                     Console.Write("Enter Age: ");
                     if (int.TryParse(Console.ReadLine(), out age) && age > 0 && age <= 30)
                         break;
-                    Console.WriteLine("Invalid age. Try again.");
+                    Console.WriteLine("Invalid age.");
                 }
 
                 while (true)
@@ -124,7 +147,6 @@ namespace StudentManagementSystem.Models
                     foreach (ClassStandard std in Enum.GetValues(typeof(ClassStandard)))
                         Console.WriteLine($"{(int)std} - {std}");
 
-                    Console.Write("Enter Class Number: ");
                     if (int.TryParse(Console.ReadLine(), out int value) &&
                         Enum.IsDefined(typeof(ClassStandard), value))
                     {
@@ -132,16 +154,10 @@ namespace StudentManagementSystem.Models
                         break;
                     }
 
-                    Console.WriteLine("Invalid class. Try again.");
+                    Console.WriteLine("Invalid class.");
                 }
 
-                lock (_rollLock)
-                {
-                    rollCount[ClassStandard]++;
-                    RollNo = rollCount[ClassStandard];
-                }
-
-                address.SetAddressDetails();
+                _address.SetAddressDetails();
                 SetHobbies();
                 SetSubjects();
                 SetSubjectMarks();
@@ -150,191 +166,132 @@ namespace StudentManagementSystem.Models
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error while entering student details: {ex.Message}");
+                Console.WriteLine($"Error: {ex.Message}");
             }
         }
 
+        
         private void SetHobbies()
         {
-            try
+            Console.WriteLine("\nEnter Hobbies (Min 1, Max 7)");
+            while (_hobbies.Count < 7)
             {
-                Console.WriteLine("\nEnter Hobbies (Min 1, Max 7)");
-                Console.WriteLine("Type 'done' when finished");
+                Console.Write($"Hobby {_hobbies.Count + 1}: ");
+                string input = Console.ReadLine();
 
-                while (hobbies.Count < 7)
+                if (input.Equals("done", StringComparison.OrdinalIgnoreCase))
                 {
-                    Console.Write($"Enter hobby {hobbies.Count + 1}: ");
-                    string input = Console.ReadLine();
-
-                    if (input.Equals("done", StringComparison.OrdinalIgnoreCase))
-                    {
-                        if (hobbies.Count >= 1)
-                            break;
-
-                        Console.WriteLine("At least one hobby required.");
-                        continue;
-                    }
-
-                    if (string.IsNullOrWhiteSpace(input))
-                    {
-                        Console.WriteLine("Hobby cannot be empty.");
-                        continue;
-                    }
-
-                    string hobby = input.Trim();
-
-                    if (!Regex.IsMatch(hobby, @"^[A-Za-z ]+$"))
-                    {
-                        Console.WriteLine("Hobby must contain only letters.");
-                        continue;
-                    }
-
-                    if (hobbies.Exists(h => h.Equals(hobby, StringComparison.OrdinalIgnoreCase)))
-                    {
-                        Console.WriteLine("Hobby already added.");
-                        continue;
-                    }
-
-                    hobbies.Add(hobby);
+                    if (_hobbies.Count > 0) break;
+                    Console.WriteLine("At least one hobby required.");
+                    continue;
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error while adding hobbies: {ex.Message}");
+
+                if (!Regex.IsMatch(input, @"^[A-Za-z ]+$"))
+                {
+                    Console.WriteLine("Only letters allowed.");
+                    continue;
+                }
+
+                if (_hobbies.Exists(h => h.Equals(input, StringComparison.OrdinalIgnoreCase)))
+                {
+                    Console.WriteLine("Duplicate hobby.");
+                    continue;
+                }
+
+                _hobbies.Add(input.Trim());
             }
         }
 
         private void SetSubjects()
         {
-            try
+            Console.WriteLine("\nEnter Subjects (Min 1, Max 6)");
+            while (_subjects.Count < 6)
             {
-                Console.WriteLine("\nEnter Subjects (Min 1, Max 6)");
-                Console.WriteLine("Type 'done' when finished");
+                Console.Write($"Subject {_subjects.Count + 1}: ");
+                string input = Console.ReadLine();
 
-                while (subjects.Count < 6)
+                if (input.Equals("done", StringComparison.OrdinalIgnoreCase))
                 {
-                    Console.Write($"Enter subject {subjects.Count + 1}: ");
-                    string input = Console.ReadLine();
-
-                    if (input.Equals("done", StringComparison.OrdinalIgnoreCase))
-                    {
-                        if (subjects.Count >= 1)
-                            break;
-
-                        Console.WriteLine("At least one subject required.");
-                        continue;
-                    }
-
-                    if (string.IsNullOrWhiteSpace(input))
-                    {
-                        Console.WriteLine("Subject cannot be empty.");
-                        continue;
-                    }
-
-                    if (!Enum.TryParse(input.Trim(), true, out Subject subject) ||
-                        !Enum.IsDefined(typeof(Subject), subject))
-                    {
-                        Console.WriteLine("Invalid subject.");
-                        continue;
-                    }
-
-                    if (subjects.Contains(subject))
-                    {
-                        Console.WriteLine("Subject already added.");
-                        continue;
-                    }
-
-                    subjects.Add(subject);
+                    if (_subjects.Count > 0) break;
+                    Console.WriteLine("At least one subject required.");
+                    continue;
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error while adding subjects: {ex.Message}");
+
+                if (Enum.TryParse(input, true, out Subject subject) &&
+                    !_subjects.Contains(subject))
+                {
+                    _subjects.Add(subject);
+                }
+                else
+                {
+                    Console.WriteLine("Invalid or duplicate subject.");
+                }
             }
         }
 
         private void SetSubjectMarks()
         {
-            try
-            {
-                Console.WriteLine("\nEnter Marks (0 - 100)");
+            _totalMarks = 0;
+            subjectMarks.Clear();
 
-                foreach (Subject sub in subjects)
+            foreach (Subject sub in _subjects)
+            {
+                int marks;
+                while (true)
                 {
-                    int marks;
-                    while (true)
-                    {
-                        Console.Write($"Enter marks for {sub}: ");
-                        if (int.TryParse(Console.ReadLine(), out marks) &&
-                            marks >= 0 && marks <= 100)
-                            break;
+                    Console.Write($"Marks for {sub}: ");
+                    if (int.TryParse(Console.ReadLine(), out marks) &&
+                        marks >= 0 && marks <= 100)
+                        break;
 
-                        Console.WriteLine("Invalid marks.");
-                    }
-
-                    subjectMarks[sub] = marks;
-                    totalMarks += marks;
+                    Console.WriteLine("Invalid marks.");
                 }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error while entering marks: {ex.Message}");
+
+                subjectMarks[sub] = marks;
+                _totalMarks += marks;
             }
         }
+
 
         public void ShowDetails()
         {
-            try
-            {
-                Console.WriteLine("\n----- STUDENT DETAILS -----");
+            Console.WriteLine("\n----- STUDENT DETAILS -----");
+            Console.WriteLine($"Name     : {_firstName} {_middleName} {_lastName}");
+            Console.WriteLine($"Age      : {age}");
+            Console.WriteLine($"Class    : {ClassStandard}");
+            Console.WriteLine($"Roll No  : {RollNo}");
 
-                if (string.IsNullOrWhiteSpace(middleName))
-                    Console.WriteLine($"Name     : {firstName} {lastName}");
-                else
-                    Console.WriteLine($"Name     : {firstName} {middleName} {lastName}");
+            _address.ShowAddress();
 
-                Console.WriteLine($"Age      : {age}");
-                Console.WriteLine($"Class    : {ClassStandard}");
-                Console.WriteLine($"Roll No  : {RollNo}");
-
-                address.ShowAddress();
-
-                Console.WriteLine("\nHobbies:");
-                foreach (string hobby in hobbies)
-                    Console.WriteLine($"- {hobby}");
-
-                Console.WriteLine("\nSubjects & Marks:");
-                foreach (var item in subjectMarks)
-                    Console.WriteLine($"{item.Key} : {item.Value}");
-
-                Console.WriteLine($"Total Marks : {totalMarks}");
-                Console.WriteLine($"Percentage  : {(double)totalMarks / subjectMarks.Count:F2}%");
-                Console.WriteLine($"Enrollment Time : {studentEnrollmentTime}");
+            Console.WriteLine("\nHobbies:");
+            foreach (string h in _hobbies) 
+            { 
+            Console.WriteLine($"- {h}");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error while displaying student details: {ex.Message}");
-            }
+
+            Console.WriteLine("\nSubjects & Marks:");
+            foreach (var s in subjectMarks)
+                Console.WriteLine($"{s.Key} : {s.Value}");
+
+            Console.WriteLine($"Percentage : {GetPercentage():F2}%");
+            Console.WriteLine($"Enrolled   : {studentEnrollmentTime}");
         }
 
-        public int GetAge()
-        {
-          return  age;
-        }
-        public ClassStandard GetClass() => ClassStandard;
-        public double GetPercentage() => (double)totalMarks / subjectMarks.Count;
-        public DateTime GetEnrollmentTime() => studentEnrollmentTime;
-        public string GetFirstName() => firstName;
-        public string GetMiddleName() => middleName;
-        public string GetLastName() => lastName;
-        public List<string> GetHobbies() => hobbies;
-
-        public List<Subject> GetSubjects() {
-            return subjects;
-        }
-        
-        public Address GetAddress => address;
+        // Get
+        public int GetAge => age;
+        public ClassStandard GetClass => ClassStandard;
         public int GetRollNo => RollNo;
-
+        public Address GetAddress => _address;
+        public double GetPercentage()
+        {
+            if (subjectMarks.Count == 0) return 0;
+            return (double)_totalMarks / subjectMarks.Count;
+        }
+        public DateTime GetEnrollmentTime => studentEnrollmentTime;
+        public string GetFirstName => _firstName;
+        public string GetMiddleName => _middleName;
+        public string GetLastName => _lastName;
+        public List<string> GetHobbies => _hobbies;
+        public List<Subject> GetSubjects => _subjects;
     }
 }

@@ -1,108 +1,133 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using StudentManagementSystem.Exceptions;
+using System;
+using System.Text.RegularExpressions;
 
 namespace StudentManagementSystem.Models
 {
     public class Address
     {
-        private int blockNo;
-        private int streetNo;
-        private string area;
-        private string city;
-        private string state;
-        private int pincode;
+        private int _blockNo;
+        private int _streetNo;
+        private string _area;
+        private string _city;
+        private string _state;
+        private int _pincode;
 
         public Address() { }
 
         public Address(int blockNo, int streetNo, string area, string city, string state, int pincode)
         {
-            this.blockNo = blockNo;
-            this.streetNo = streetNo;
-            this.area = area;
-            this.city = city;
-            this.state = state;
-            this.pincode = pincode;
+            _blockNo = blockNo;
+            _streetNo = streetNo;
+            _area = area;
+            _city = city;
+            _state = state;
+            _pincode = pincode;
+
+            ValidateAddress();
         }
 
         public void SetAddressDetails()
         {
-            try
+            try { 
+            Console.WriteLine("\nEnter Address");
+
+            _blockNo = ReadPositiveInt("Enter Block No: ");
+            _streetNo = ReadPositiveInt("Enter Street No: ");
+            _area = ReadText("Enter Area: ");
+            _city = ReadText("Enter City: ");
+            _state = ReadText("Enter State: ");
+            _pincode = ReadPincode("Enter Pincode: ");
+
+            ValidateAddress();
+            }
+            catch (StudentValidationException ex)
             {
-                Console.WriteLine("Enter Address");
-
-                while (true)
-                {
-                    Console.Write("Enter Block No: ");
-                    if (int.TryParse(Console.ReadLine(), out blockNo) && blockNo > 0)
-                        break;
-                    Console.WriteLine("Invalid Block No.");
-                }
-
-                while (true)
-                {
-                    Console.Write("Enter Street No: ");
-                    if (int.TryParse(Console.ReadLine(), out streetNo) && streetNo > 0)
-                        break;
-                    Console.WriteLine("Invalid Street No.");
-                }
-
-                while (true)
-                {
-                    Console.Write("Enter Area: ");
-                    area = Console.ReadLine();
-                    if (!string.IsNullOrWhiteSpace(area))
-                        break;
-                    Console.WriteLine("Area required.");
-                }
-
-                while (true)
-                {
-                    Console.Write("Enter City: ");
-                    city = Console.ReadLine();
-                    if (!string.IsNullOrWhiteSpace(city))
-                        break;
-                    Console.WriteLine("City required.");
-                }
-
-                while (true)
-                {
-                    Console.Write("Enter State: ");
-                    state = Console.ReadLine();
-                    if (!string.IsNullOrWhiteSpace(state))
-                        break;
-                    Console.WriteLine("State required.");
-                }
-
-                while (true)
-                {
-                    Console.Write("Enter Pincode: ");
-                    if (int.TryParse(Console.ReadLine(), out pincode) &&
-                        pincode >= 100000 && pincode <= 999999)
-                        break;
-                    Console.WriteLine("Invalid Pincode.");
-                }
+                Console.WriteLine("Address validation failed:");
+                Console.WriteLine(ex.Message);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("An unexpected error occurred while entering address details.");
+                Console.WriteLine("Unexpected error while entering address.");
                 Console.WriteLine($"Error: {ex.Message}");
             }
         }
 
-        public int GetPincode() => pincode;
-        public String GetCity() => city;
-        public String GetState() => state;
-        public String GetArea() => area;
+        
+
+        private void ValidateAddress()
+        {
+            if (_pincode < 100000 || _pincode > 999999)
+                throw new StudentValidationException("Pincode must be exactly 6 digits.");
+
+            if (string.IsNullOrWhiteSpace(_city))
+                throw new StudentValidationException("City cannot be empty.");
+
+            if (string.IsNullOrWhiteSpace(_state))
+                throw new StudentValidationException("State cannot be empty.");
+        }
+
+        private bool IsValidText(string input)
+        {
+            return !string.IsNullOrWhiteSpace(input) &&
+                   Regex.IsMatch(input, @"^[A-Za-z ]+$");
+        }
+
+        private int ReadPositiveInt(string message)
+        {
+            while (true)
+            {
+                Console.Write(message);
+                if (int.TryParse(Console.ReadLine(), out int value) && value > 0)
+                    return value;
+
+                Console.WriteLine("Enter a positive number.");
+            }
+        }
+
+        private string ReadText(string message)
+        {
+            while (true)
+            {
+                Console.Write(message);
+                string input = Console.ReadLine();
+
+                if (IsValidText(input))
+                    return input.Trim();
+
+                Console.WriteLine("Only letters and spaces allowed.");
+            }
+        }
+
+        private int ReadPincode(string message)
+        {
+            while (true)
+            {
+                Console.Write(message);
+                if (int.TryParse(Console.ReadLine(), out int pin) &&
+                    pin >= 100000 && pin <= 999999)
+                    return pin;
+
+                Console.WriteLine("Pincode must be 6 digits.");
+            }
+        }
+
+        //Get
+
+        public int GetPincode => _pincode;
+        public string GetCity => _city;
+        public string GetState => _state;
+        public string GetArea => _area;
+
         public void ShowAddress()
         {
             Console.WriteLine("\nAddress:");
-            Console.WriteLine($"Block No  : {blockNo}");
-            Console.WriteLine($"Street No : {streetNo}");
-            Console.WriteLine($"Area      : {area}");
-            Console.WriteLine($"City      : {city}");
-            Console.WriteLine($"State     : {state}");
-            Console.WriteLine($"Pincode   : {pincode}");
+            Console.WriteLine($"Block No  : {_blockNo}");
+            Console.WriteLine($"Street No : {_streetNo}");
+            Console.WriteLine($"Area      : {_area}");
+            Console.WriteLine($"City      : {_city}");
+            Console.WriteLine($"State     : {_state}");
+            Console.WriteLine($"Pincode   : {_pincode}");
         }
     }
 }
