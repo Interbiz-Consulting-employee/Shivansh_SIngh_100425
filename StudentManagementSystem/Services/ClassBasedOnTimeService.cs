@@ -35,7 +35,7 @@ namespace StudentManagementSystem.Services
 
                         foreach (Student s in students)
                         {
-                            ClassStandard cls = s.GetClass;
+                            ClassStandard cls = s.Class;
                             if (!classes.Contains(cls))
                             {
                                 classes.Add(cls);

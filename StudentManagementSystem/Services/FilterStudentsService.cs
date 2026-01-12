@@ -1,4 +1,5 @@
-﻿using StudentManagementSystem.Enums;
+﻿using StudentManagementSystem.Constants;
+using StudentManagementSystem.Enums;
 using StudentManagementSystem.Models;
 using System;
 using System.Collections.Generic;
@@ -70,7 +71,7 @@ namespace StudentManagementSystem.Services
 
             foreach (Student s in students)
             {
-                if (s.GetAge >= min && s.GetAge <= max)
+                if (s.Age >= min && s.Age <= max)
                     result.Add(s);
             }
 
@@ -82,7 +83,7 @@ namespace StudentManagementSystem.Services
             List<Student> result = new List<Student>();
 
             foreach (Student s in students)
-                if (string.Equals(s.GetFirstName, name, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(s.FirstName, name, StringComparison.OrdinalIgnoreCase))
                     result.Add(s);
 
             return result;
@@ -93,8 +94,8 @@ namespace StudentManagementSystem.Services
             List<Student> result = new List<Student>();
 
             foreach (Student s in students)
-                if (!string.IsNullOrWhiteSpace(s.GetMiddleName) &&
-                    string.Equals(s.GetMiddleName, name, StringComparison.OrdinalIgnoreCase))
+                if (!string.IsNullOrWhiteSpace(s.MiddleName) &&
+                    string.Equals(s.MiddleName, name, StringComparison.OrdinalIgnoreCase))
                     result.Add(s);
 
             return result;
@@ -105,7 +106,7 @@ namespace StudentManagementSystem.Services
             List<Student> result = new List<Student>();
 
             foreach (Student s in students)
-                if (string.Equals(s.GetLastName, name, StringComparison.OrdinalIgnoreCase))
+                if (string.Equals(s.LastName, name, StringComparison.OrdinalIgnoreCase))
                     result.Add(s);
 
             return result;
@@ -117,7 +118,7 @@ namespace StudentManagementSystem.Services
 
             foreach (Student s in students)
             {
-                foreach (string h in s.GetHobbies)
+                foreach (string h in s.Hobbies)
                 {
                     if (string.Equals(h, hobby, StringComparison.OrdinalIgnoreCase))
                     {
@@ -135,7 +136,7 @@ namespace StudentManagementSystem.Services
             List<Student> result = new List<Student>();
 
             foreach (Student s in students)
-                if (s.GetClass == cls)
+                if (s.Class == cls)
                     result.Add(s);
 
             return result;
@@ -148,7 +149,7 @@ namespace StudentManagementSystem.Services
 
             foreach (Student s in students)
             {
-                if (s.GetEnrollmentTime.Date == date.Date)
+                if (s.EnrollmentDate.Date == date.Date)
                     result.Add(s);
             }
 
@@ -166,7 +167,7 @@ namespace StudentManagementSystem.Services
 
                 foreach (Subject sub in selectedSubjects)
                 {
-                    if (!s.GetSubjects.Contains(sub))
+                    if (!s.Subjects.Contains(sub))
                     {
                         hasAll = false;
                         break;
@@ -262,8 +263,9 @@ namespace StudentManagementSystem.Services
                     return;
 
                 default:
-                    Console.WriteLine("Invalid choice.");
-                    return;
+                    Console.WriteLine(Messages.SelectValidOption);
+                    filtered = null;
+                    break;
             }
 
             Show(filtered);
@@ -288,32 +290,35 @@ namespace StudentManagementSystem.Services
                 case 1:
                     string city = ReadValidatedName("Enter City: ");
                     foreach (Student s in students)
-                        if (s.GetAddress != null &&
-                            string.Equals(s.GetAddress.GetCity, city, StringComparison.OrdinalIgnoreCase))
+                        if (s.Address != null &&
+                            string.Equals(s.Address.GetCity, city, StringComparison.OrdinalIgnoreCase))
                             result.Add(s);
                     break;
 
                 case 2:
                     string area = ReadValidatedAddressText("Enter Area: ");
                     foreach (Student s in students)
-                        if (s.GetAddress != null &&
-                            string.Equals(s.GetAddress.GetArea, area, StringComparison.OrdinalIgnoreCase))
+                        if (s.Address != null &&
+                            string.Equals(s.Address.GetArea, area, StringComparison.OrdinalIgnoreCase))
                             result.Add(s);
                     break;
 
                 case 3:
                     string state = ReadValidatedName("Enter State: ");
                     foreach (Student s in students)
-                        if (s.GetAddress != null &&
-                            string.Equals(s.GetAddress.GetState, state, StringComparison.OrdinalIgnoreCase))
+                        if (s.Address != null &&
+                            string.Equals(s.Address.GetState, state, StringComparison.OrdinalIgnoreCase))
                             result.Add(s);
                     break;
 
                 case 4:
                     int pin = ReadValidatedPincode();
                     foreach (Student s in students)
-                        if (s.GetAddress != null && s.GetAddress.GetPincode == pin)
+                        if (s.Address != null && s.Address.GetPincode == pin)
                             result.Add(s);
+                    break;
+                default:
+                    Console.WriteLine(Messages.SelectValidOption);
                     break;
             }
 
@@ -322,6 +327,12 @@ namespace StudentManagementSystem.Services
 
         private static void Show(List<Student> students)
         {
+
+            if (students==null)
+            {return;
+            }
+
+
             if (students.Count == 0)
             {
                 Console.WriteLine("No students found.");

@@ -44,8 +44,9 @@ namespace StudentManagementSystem.Services
 
             foreach (Student s in students)
             {
-                if (s.GetClass == standard)
-                {
+                if (s.Class == standard)
+                { 
+                    if(s.IsPass )
                     studentsOfClass.Add(s);
                 }
             }
@@ -68,7 +69,7 @@ namespace StudentManagementSystem.Services
             Student rankedStudent = studentsOfClass[rank - 1];
 
             Console.WriteLine(
-                $"Rank {rank} in class {standard} : Roll No {rankedStudent.GetRollNo}");
+                $"Rank {rank} in class {standard} : Roll No {rankedStudent.RollNo}");
 
             Console.WriteLine("Want to check full details? Press Y");
             string choice = Console.ReadLine();

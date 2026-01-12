@@ -28,17 +28,18 @@ namespace StudentManagementSystem.Models
         private string _firstName;
         private string _middleName;
         private string _lastName;
-        private int age;
-        private int RollNo;
+        private int _age;
+        private int _rollNo;
         private ClassStandard ClassStandard;
         private Address _address = new Address();
-
+        
         private List<string> _hobbies = new List<string>();
         private List<Subject> _subjects = new List<Subject>();
-        private Dictionary<Subject, int> subjectMarks = new Dictionary<Subject, int>();
+        private Dictionary<Subject, double> subjectMarks = new Dictionary<Subject, double>();
+        private bool _pass = true;
 
-        private int _totalMarks;
-        private DateTime studentEnrollmentTime;
+        private double _totalMarks;
+        private DateTime _studentEnrollmentDateTime;
 
         // constructor
         public Student() { }
@@ -53,8 +54,10 @@ namespace StudentManagementSystem.Models
             List<string> _hobbies,
             Dictionary<Subject, int> _subjectMarksInput)
         {
-            // Basic validation
-            if (string.IsNullOrWhiteSpace(_firstName))
+            try
+            {
+                // Basic validation
+                if (string.IsNullOrWhiteSpace(_firstName))
                 throw new StudentValidationException("First name is required");
 
             if (string.IsNullOrWhiteSpace(_lastName))
@@ -69,37 +72,34 @@ namespace StudentManagementSystem.Models
             if (_subjectMarksInput == null || _subjectMarksInput.Count < 1 || _subjectMarksInput.Count > 6)
                 throw new StudentValidationException("Subjects must be between 1 and 6");
 
-            
-            lock (_studentLock)
-            {
-                foreach (Student s in _studentRegistry)
+           
+                lock (_studentLock)
                 {
-                    if (s._firstName.Equals(_firstName, StringComparison.OrdinalIgnoreCase) &&
-                        s._lastName.Equals(_lastName, StringComparison.OrdinalIgnoreCase) &&
-                        s.ClassStandard == _classStandard)
+                    foreach (Student s in _studentRegistry)
                     {
-                        throw new StudentValidationException("Duplicate student detected");
+                        if (s._firstName.Equals(_firstName, StringComparison.OrdinalIgnoreCase) &&
+                            s._lastName.Equals(_lastName, StringComparison.OrdinalIgnoreCase) &&
+                            s.ClassStandard == _classStandard)
+                        {
+                            throw new StudentValidationException("Duplicate student detected");
+                        }
                     }
                 }
-            }
+            
 
             this._firstName = _firstName.Trim();
             this._middleName = _middleName?.Trim();
             this._lastName = _lastName.Trim();
-            this.age = age;
+            this._age = age;
             this.ClassStandard = _classStandard;
             this._address = _address ?? throw new ArgumentNullException(nameof(_address));
             this._hobbies = _hobbies;
 
-            //Used lock so that no multiple threads may not access static _rollCount
-            lock (_rollLock)
-            {
-                _rollCount[_classStandard]++;
-                RollNo = _rollCount[_classStandard];
-            }
+                
+                RollNumberGenerator();
 
-            // Marks validation
-            _totalMarks = 0;
+                // Marks validation
+                _totalMarks = 0;
             foreach (var item in _subjectMarksInput)
             {
                 if (item.Value < 0 || item.Value > 100)
@@ -110,12 +110,21 @@ namespace StudentManagementSystem.Models
                 _totalMarks += item.Value;
             }
 
-            studentEnrollmentTime = DateTime.Now;
+            _studentEnrollmentDateTime = DateTime.Now;
 
             // Register student
             lock (_studentLock)
             {
                 _studentRegistry.Add(this);
+            }
+            }
+            catch (StudentValidationException ex)
+            {
+                Console.Write(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
             }
         }
 
@@ -136,7 +145,7 @@ namespace StudentManagementSystem.Models
                 while (true)
                 {
                     Console.Write("Enter Age: ");
-                    if (int.TryParse(Console.ReadLine(), out age) && age > 0 && age <= 30)
+                    if (int.TryParse(Console.ReadLine(), out _age) && _age > 0 && _age <= 30)
                         break;
                     Console.WriteLine("Invalid age.");
                 }
@@ -157,29 +166,39 @@ namespace StudentManagementSystem.Models
                     Console.WriteLine("Invalid class.");
                 }
 
-                _address.SetAddressDetails();
-                SetHobbies();
                 SetSubjects();
                 SetSubjectMarks();
-
-                studentEnrollmentTime = DateTime.Now;
+                RollNumberGenerator();
+                
+                _studentEnrollmentDateTime = DateTime.Now;
+                _address.SetAddressDetails();
+                SetHobbies();
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
         }
+        //Used lock so that no multiple threads may not access static _rollCount
+        public void RollNumberGenerator()
+        {
+            lock (_rollLock)
+            {
+                _rollCount[Class]++;
+                _rollNo = _rollCount[Class];
+            }
+        }
 
-        
+
         private void SetHobbies()
         {
-            Console.WriteLine("\nEnter Hobbies (Min 1, Max 7)");
-            while (_hobbies.Count < 7)
+            Console.WriteLine("\n Enter Hobbies (Min 1, Max 6) ");
+            while (_hobbies.Count < 6)
             {
                 Console.Write($"Hobby {_hobbies.Count + 1}: ");
                 string input = Console.ReadLine();
 
-                if (input.Equals("done", StringComparison.OrdinalIgnoreCase))
+                if (input.Trim().Equals("done", StringComparison.OrdinalIgnoreCase))
                 {
                     if (_hobbies.Count > 0) break;
                     Console.WriteLine("At least one hobby required.");
@@ -192,7 +211,7 @@ namespace StudentManagementSystem.Models
                     continue;
                 }
 
-                if (_hobbies.Exists(h => h.Equals(input, StringComparison.OrdinalIgnoreCase)))
+                if (_hobbies.Exists(h => h.Replace(" ","").Equals(input.Replace(" ",""), StringComparison.OrdinalIgnoreCase)))
                 {
                     Console.WriteLine("Duplicate hobby.");
                     continue;
@@ -204,36 +223,50 @@ namespace StudentManagementSystem.Models
 
         private void SetSubjects()
         {
-            Console.WriteLine("\nEnter Subjects (Min 1, Max 6)");
+            int c = 0;
+            Console.WriteLine("\nEnter Subjects (Total 5 Subjects --- Mandatory Subjects are already added )");
             foreach (Subject sub in Enum.GetValues(typeof(Subject)))
+            {   
+                if(c++ > 1)
                 Console.WriteLine($"{(int)sub} - {sub}");
+            }
 
-            while (_subjects.Count < 6)
+            Subject subject;
+
+            // Auto-add compulsory subjects only once
+            Enum.TryParse("English", true, out subject);
+            _subjects.Add(subject);
+
+            Enum.TryParse("Maths", true, out subject);
+            _subjects.Add(subject);
+            while (_subjects.Count < 5)
             {
-                Console.Write($"Subject {_subjects.Count + 1}: ");
-                string input = Console.ReadLine();
+                if (_subjects.Count > 1)
+                {       
+                    Console.Write($"Subject {_subjects.Count + 1}: ");
+                    string input = Console.ReadLine();
+                    input = input.Replace(" ", "");
 
-                if (input.Equals("done", StringComparison.OrdinalIgnoreCase))
-                {
-                    if (_subjects.Count > 0) break;
-                    Console.WriteLine("At least one subject required.");
-                    continue;
-                }
 
-                if (
-                    Enum.TryParse(input, true, out Subject subject) &&
+                    if (Enum.TryParse(input, true, out subject) &&
                     Enum.IsDefined(typeof(Subject), subject) &&
-                    !_subjects.Contains(subject)
-                )
-                {
-                    _subjects.Add(subject);
-                }
-                else
-                {
-                    Console.WriteLine("Invalid or duplicate subject.");
+                    !_subjects.Contains(subject))
+                    {
+                        _subjects.Add(subject);
+                    }
+                    else
+                    {   if(!_subjects.Contains(subject))
+                          Console.WriteLine("Duplicate subject.");
+                        else
+                        {
+                          Console.WriteLine("Invalid subject.");
+                        }
+                    }
                 }
             }
         }
+
+        
 
 
         private void SetSubjectMarks()
@@ -243,18 +276,21 @@ namespace StudentManagementSystem.Models
 
             foreach (Subject sub in _subjects)
             {
-                int marks;
+                double marks;
                 while (true)
                 {
                     Console.Write($"Marks for {sub}: ");
-                    if (int.TryParse(Console.ReadLine(), out marks) &&
+                    if (double.TryParse(Console.ReadLine(), out marks) &&
                         marks >= 0 && marks <= 100)
+                    {  if (marks < 33)
+                            _pass = false;
                         break;
-
-                    Console.WriteLine("Invalid marks.");
+                    }
+                    else
+                        Console.WriteLine("Invalid marks.");
                 }
 
-                subjectMarks[sub] = marks;
+                subjectMarks[sub] = Math.Ceiling(marks);
                 _totalMarks += marks;
             }
         }
@@ -269,41 +305,51 @@ namespace StudentManagementSystem.Models
             }
             else
                 Console.WriteLine($"Name     : {_firstName} {_middleName} {_lastName}");
-            Console.WriteLine($"Age      : {age}");
+            Console.WriteLine($"Age      : {_age}");
             Console.WriteLine($"Class    : {ClassStandard}");
             Console.WriteLine($"Roll No  : {RollNo}");
-
+            Console.WriteLine($"Enrolled   : {_studentEnrollmentDateTime}");
             _address.ShowAddress();
 
-            Console.WriteLine("\nHobbies:");
-            foreach (string h in _hobbies) 
-            { 
-            Console.WriteLine($"- {h}");
-            }
+          
 
             Console.WriteLine("\nSubjects & Marks:");
             foreach (var s in subjectMarks)
                 Console.WriteLine($"{s.Key} : {s.Value}");
 
-            Console.WriteLine($"Percentage : {GetPercentage():F2}%");
-            Console.WriteLine($"Enrolled   : {studentEnrollmentTime}");
+
+            Console.WriteLine($"Total Marks : {_totalMarks} out of 500 ");
+
+            Console.WriteLine($"Percentage : {GetPercentage()}%");
+
+
+            Console.WriteLine($"Status Pass/Fail : {(IsPass ? "PASS" : "FAIL")}");
+            ;
+
+            Console.WriteLine("\nHobbies:");
+            foreach (string h in _hobbies)
+            {
+                Console.WriteLine($"- {h}");
+            }
         }
 
         // Get
-        public int GetAge => age;
-        public ClassStandard GetClass => ClassStandard;
-        public int GetRollNo => RollNo;
-        public Address GetAddress => _address;
+        public int Age => _age;
+        public ClassStandard Class => ClassStandard;
+        public int RollNo => _rollNo;
+        public Address Address => _address;
         public double GetPercentage()
         {
             if (subjectMarks.Count == 0) return 0;
             return (double)_totalMarks / subjectMarks.Count;
         }
-        public DateTime GetEnrollmentTime => studentEnrollmentTime;
-        public string GetFirstName => _firstName;
-        public string GetMiddleName => _middleName;
-        public string GetLastName => _lastName;
-        public List<string> GetHobbies => _hobbies;
-        public List<Subject> GetSubjects => _subjects;
+        public DateTime EnrollmentDate => _studentEnrollmentDateTime;
+        public string FirstName => _firstName;
+        public string MiddleName => _middleName;
+        public string LastName => _lastName;
+        public List<string> Hobbies => _hobbies;
+        public List<Subject> Subjects => _subjects;
+
+        public bool IsPass => _pass;
     }
 }

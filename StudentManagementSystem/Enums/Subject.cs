@@ -8,10 +8,10 @@ namespace StudentManagementSystem.Enums
     {
         English,
         Maths,
+        Hindi,
         Science,
         SocialStudies,
-        ComputerScience,
-        Hindi,
+        ComputerScience, 
         Physics,
         Chemistry,
         Biology
