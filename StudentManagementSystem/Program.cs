@@ -4,6 +4,7 @@ using StudentManagementSystem.Enums;
 using StudentManagementSystem.Models;
 using StudentManagementSystem.Services;
 using System;
+
 class Program
 {
     static void Main()
