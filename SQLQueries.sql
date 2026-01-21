@@ -64,17 +64,19 @@ Where d.DepartmentName = 'Computer Science';
 
 --7. Get the name of the university who have passed with maximum marks.
 
-SELECT s.StudentName, s.StudentMarks , u.UniversityName
-FROM Student s
-JOIN Department d ON s.DepartmentID = d.DepartmentID
-JOIN College c ON d.CollegeID = c.CollegeID
-JOIN University u ON c.UniversityID = u.UniversityID
-WHERE s.StudentResult = 'Pass'
-  AND s.StudentMarks = (
-        SELECT MAX(StudentMarks)
-        FROM Student
-        WHERE StudentResult = 'Pass'
-      );
+SELECT StudentName, StudentMarks, UniversityName
+FROM (
+    SELECT s.StudentName,
+           s.StudentMarks,
+           u.UniversityName,
+           RANK() OVER (ORDER BY s.StudentMarks DESC) AS rnk
+    FROM Student s
+    JOIN Department d ON s.DepartmentID = d.DepartmentID
+    JOIN College c ON d.CollegeID = c.CollegeID
+    JOIN University u ON c.UniversityID = u.UniversityID
+    WHERE s.StudentResult = 'Pass'
+) t
+WHERE rnk = 1;
 
 --8. Get list of students who study in grade ‘A’ University
 
