@@ -37,7 +37,7 @@ class Program
         var result1 = LongestZeroSumSubarray(nums1);
         Console.WriteLine($"Length: {result1.length}, Start: {result1.start}, End: {result1.end}");
 
-        int[] nums2 = {4, -2, -2, 2, -2, -4};
+        int[] nums2 = {6, -2, -2,-2,5, 2, -2, -4};
         var result2 = LongestZeroSumSubarray(nums2);
         Console.WriteLine($"Length: {result2.length}, Start: {result2.start}, End: {result2.end}");
 
