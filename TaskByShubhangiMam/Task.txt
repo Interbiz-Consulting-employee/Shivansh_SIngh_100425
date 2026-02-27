@@ -1,0 +1,221 @@
+1. [Category] Attribute
+
+[Category] is specifically designed to group and filter tests.
+
+Organize tests (e.g., Smoke, Regression, Integration)
+Filter tests during execution
+Widely supported in runners and CI pipelines
+
+*Example
+[Test]
+[Category("Smoke")]
+public void Login_Should_Work()
+{
+    Assert.Pass();
+}
+✅ Running by category
+
+Using NUnit Console:
+nunit3-console MyTests.dll --where "cat == Smoke"
+Using .NET CLI:
+dotnet test --filter "Category=Smoke"
+
+[Property] Attribute (Often Confused with “Assigned Category”)
+
+[Property] is more general. It allows attaching custom metadata to tests.
+
+Add custom key-value metadata
+Advanced filtering scenarios
+Store additional test info (Author, Priority, etc.)
+
+* Example
+[Test]
+[Property("Priority", "High")]
+public void Payment_Should_Process()
+{
+    Assert.Pass();
+}
+✅ Filtering by property
+dotnet test --filter "Priority=High"
+
+* Key Differences
+Feature	                      [Category]	                   [Property]
+Primary purpose	             Group tests	                  Add custom metadata
+Built-infiltering support        Yes	                            Yes
+Custom key/value support         ❌ (only string name)	            ✅
+Best for	            Smoke, Regression, API, UI        	Priority, Author, JiraID
+
+Use [Category] when:
+You want logical grouping
+You run subsets like Smoke/Regression
+You want simple test filtering
+
+Use [Property] when:
+You need key-value metadata
+You want richer filtering logic
+You track priority or external IDs
+
+2.What We Place Inside [SetUp] (List)
+
+*Object Initialization
+  Create service or system under test (SUT)
+  Instantiate helper classes
+
+*Mock Initialization
+  Create mock dependencies
+  Configure mock behavior
+
+*Test Data Preparation
+  Create common input models
+  Seed in-memory collections
+
+*Resetting Shared State
+  Clear lists
+  Reset counters
+  Reinitialize static variables (if needed)
+
+*Configuration Setup
+  Load test configuration
+  Set environment variables (if required)
+
+*Lightweight Resource Setup
+  Open in-memory DB connection
+  Prepare temporary files
+
+Example : [SetUp]
+        public void SetUp()
+        {
+            // 1. Object initialization
+            _calculator = new Calculator();
+
+            // 2. Test data preparation
+            _numbers = new List<int> { 1, 2, 3 };
+
+            // 3. Reset state if needed
+            _numbers.Clear();
+        }
+
+3. How to Put Data in textbox using json
+
+Multiple ways are there 
+1. by Deserializing it 
+   then using it with class
+------------------------------------     
+   public class User
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+}
+------------------------------------------
+using Newtonsoft.Json;
+
+string json = "{ \"Name\": \"John\", \"Age\": 30 }";
+
+User user = JsonConvert.DeserializeObject<User>(json);
+
+Console.WriteLine(user.Name);   // John
+
+----------------------------------------------
+
+2. Next one is direct parsing to root " i did a practical "
+
+string json = "{\"user\":{\"name\":\"Alice\",\"age\":25}}";
+using JsonDocument doc = JsonDocument.Parse(json);
+JsonElement root = doc.RootElement;
+
+string name = root.GetProperty("user").GetProperty("name").GetString();
+int age = root.GetProperty("user").GetProperty("age").GetInt32();
+
+Console.WriteLine(name); // Alice
+Console.WriteLine(age);  // 25
+
+4. How can we verify that the downloaded file is correct
+
+1. Set a known download folder
+
+Before downloading, configure the browser to save files to a known location automatically.
+
+Chrome example in C#
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+
+var options = new ChromeOptions();
+options.AddUserProfilePreference("download.default_directory", @"C:\Downloads\TestFiles");
+options.AddUserProfilePreference("download.prompt_for_download", false);
+
+IWebDriver driver = new ChromeDriver(options);
+
+Now all downloaded files will go to C:\Downloads\TestFiles automatically.
+
+2. Trigger the download
+
+Use Selenium to click the download link/button:
+driver.FindElement(By.Id("downloadButton")).Click();
+
+Wait if necessary for the download to complete.
+
+3️. Wait for the file to exist
+
+Downloads may take time. You can poll the filesystem to wait until the file appears:
+
+string folderPath = @"C:\Downloads\TestFiles";
+string fileName = "report.pdf";
+string fullPath = Path.Combine(folderPath, fileName);
+
+int timeout = 10; // seconds
+int elapsed = 0;
+
+while (!File.Exists(fullPath) && elapsed < timeout * 1000)
+{
+    Thread.Sleep(500); // check every 0.5 sec
+    elapsed += 500;
+}
+
+if (!File.Exists(fullPath))
+{
+    throw new Exception("File not downloaded!");
+}
+
+4️. Verify file content
+
+Depending on file type:
+
+a) PDF
+
+Use a PDF library like iTextSharp or PdfSharp to read content.
+
+using iText.Kernel.Pdf;
+using iText.Kernel.Pdf.Canvas.Parser;
+
+using (PdfReader reader = new PdfReader(fullPath))
+using (PdfDocument pdf = new PdfDocument(reader))
+{
+    string text = PdfTextExtractor.GetTextFromPage(pdf.GetPage(1));
+    if (!text.Contains("Expected Text"))
+        throw new Exception("PDF content is incorrect!");
+}
+b) Excel (.xlsx)
+
+Use ClosedXML or EPPlus:
+
+using ClosedXML.Excel;
+
+using (var workbook = new XLWorkbook(fullPath))
+{
+    var ws = workbook.Worksheet(1);
+    string value = ws.Cell("A1").GetString();
+    if (value != "Expected Value")
+        throw new Exception("Excel content mismatch!");
+}
+c) CSV / JSON / TXT
+
+Read file as text:
+
+string content = File.ReadAllText(fullPath);
+if (!content.Contains("Expected Data"))
+    throw new Exception("CSV/JSON content mismatch!");
+5️.  Clean up (optional)
+
+Delete the downloaded file after verification to keep the folder clean:
+
+File.Delete(fullPath);
