@@ -14,23 +14,32 @@ class PowerOfTwoChecker
 
     static void Main()
     {
-        int inputNumber = 1;
+        int inputNumber;
+
+        Console.WriteLine("Power Of Two Checker");
+        while (true)
+        {
+            Console.Write("Enter a positive integer: ");
+            string userInput = Console.ReadLine();
+
+            if (!int.TryParse(userInput, out inputNumber))
+            {
+                Console.WriteLine("Invalid input. Please enter a valid integer.\n");
+                continue;
+            }
+
+            if (inputNumber <= 0)
+            {
+                Console.WriteLine("Please enter a number greater than 0.\n");
+                continue;
+            }
+
+            break;
+        }
 
         bool result = CheckIfPowerOfTwo(inputNumber);
-        Console.WriteLine("Input = " + inputNumber);
-        Console.WriteLine("Is Power Of Two = " + result);
+
         Console.WriteLine();
-
-        inputNumber = 16;
-
-        result = CheckIfPowerOfTwo(inputNumber);
-        Console.WriteLine("Input = " + inputNumber);
-        Console.WriteLine("Is Power Of Two = " + result);
-        Console.WriteLine();
-
-        inputNumber = 3;
-
-        result = CheckIfPowerOfTwo(inputNumber);
         Console.WriteLine("Input = " + inputNumber);
         Console.WriteLine("Is Power Of Two = " + result);
     }
