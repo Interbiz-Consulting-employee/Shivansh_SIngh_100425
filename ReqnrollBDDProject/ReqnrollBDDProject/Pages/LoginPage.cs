@@ -1,46 +1,28 @@
-﻿using OpenQA.Selenium;
-using System;
+using OpenQA.Selenium;
+using System.Linq;
 
 namespace ReqnrollBDDProject.Pages
 {
     public class LoginPage : BasePage
     {
-        public LoginPage(IWebDriver driver) : base(driver) { }
-
+        
         private readonly By usernameField = By.Id("signInName");
         private readonly By passwordField = By.Id("password");
         private readonly By loginButton = By.Id("next");
 
-        private readonly By incorrectPasswordError =
-            By.XPath("//p[text()='Your password is incorrect, please try again or use forgot password link to reset it']");
-
-        private readonly By accountNotFoundError =
-            By.XPath("//p[text()=\"We can't seem to find your account.\"]");
-
-        private readonly By missingEmailError =
-            By.XPath("//p[text()='Please enter your Email Address']");
-
-        private readonly By missingPasswordError =
-            By.XPath("//p[text()='Please enter your password']");
-
-        private readonly By bothFieldsError =
-            By.XPath("//div[@id='api'][.//p[text()='Missing required element [Email Address]'] and .//p[text()='Please enter your password']]");
-
-        public void EnterUsername(string username)
+        private readonly By[] errorLocators =
         {
-            EnterText(usernameField, username);
-        }
+            By.XPath("//p[text()='Your password is incorrect, please try again or use forgot password link to reset it']"),
+            By.XPath("//p[text()=\"We can't seem to find your account.\"]"),
+            By.XPath("//p[text()='Please enter your Email Address']"),
+            By.XPath("//p[text()='Please enter your password']"),
+            By.XPath("//div[@id='api'][.//p[text()='Missing require element [Email Address]'] and .//p[text()='Please enter your password']]")
+        };
 
-        public void EnterPassword(string password)
-        {
-            EnterText(passwordField, password);
-        }
-
-        public void ClickLogin()
-        {
-            ClickElement(loginButton);
-        }
-
+        private readonly By dashboardIdentifier = By.XPath("//span//img[@class]");
+        public void EnterUsername(string username) => EnterText(usernameField, username);
+        public void EnterPassword(string password) => EnterText(passwordField, password);
+        public void ClickLogin() => ClickElement(loginButton);
         public void Login(string username, string password)
         {
             EnterUsername(username);
@@ -48,27 +30,16 @@ namespace ReqnrollBDDProject.Pages
             ClickLogin();
         }
 
-        public bool IsLoginErrorDisplayed()
+        public bool IsLoginErrorDisplayed() =>
+            errorLocators.Any(locator => Driver.FindElements(locator).Any(e => e.Displayed));
+
+        public bool IsLoginSuccessful() =>
+            Driver.FindElements(dashboardIdentifier).Any(e => e.Displayed);
+
+        public string GetLoginResult()
         {
-            By[] errorLocators =
-            {
-                incorrectPasswordError,
-                accountNotFoundError,
-                missingEmailError,
-                missingPasswordError,
-                bothFieldsError
-            };
-
-            foreach (var locator in errorLocators)
-            {
-                if (driver.FindElements(locator).Count > 0)
-                {
-                    Console.WriteLine($"Login error found using locator: {locator}");
-                    return true;
-                }
-            }
-
-            return false;
+            Wait.Until(d => IsLoginErrorDisplayed() || IsLoginSuccessful());
+            return IsLoginErrorDisplayed() ? "failure" : "success";
         }
     }
 }

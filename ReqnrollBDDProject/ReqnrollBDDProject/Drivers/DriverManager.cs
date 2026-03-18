@@ -1,59 +1,39 @@
-﻿using OpenQA.Selenium;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Edge;
-
+using System;
+using System.Threading;
 
 namespace ReqnrollBDDProject.Drivers
 {
     public static class DriverManager
     {
-        private static ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>(); 
-        
-        // {Kaustub sir} Each thread has its own instance of IWebDriver 
-        // Prevents Accidental Modification //Maintains Control Over WebDriver Lifecycle 
-        // Supports Stable Parallel Execution & Ensures Thread Safety in Parallel Execution
+        private static readonly ThreadLocal<IWebDriver> driver = new ThreadLocal<IWebDriver>();
+        public static IWebDriver Driver => driver.Value ?? throw new InvalidOperationException("WebDriver not initialized.");
 
-
-        public static IWebDriver GetDriver() => driver.Value;
-
-        public static void SetDriver(IWebDriver webDriver) => driver.Value = webDriver;
-
-        public static IWebDriver CreateDriver(string browser = "chrome")
+        public static IWebDriver CreateDriver()
         {
-            IWebDriver localDriver;
-            switch (browser.ToLower())
-            {
-                case "chrome":
-                    var chromeOptions = new ChromeOptions();      // ChromeOptions in Selenium is a class used to customize how the Chrome browser starts and behaves during automation. { Rishabh Sir : Do in Incognito }                    
-                    chromeOptions.AddArgument("--incognito");
-                    localDriver = new ChromeDriver(chromeOptions);
-                    break;
+            var chromeOptions = new ChromeOptions();
+            chromeOptions.AddArgument("--incognito");
 
-                case "edge":
-                    var edgeOptions = new EdgeOptions();
-                    edgeOptions.AddArgument("--inprivate");
-                    localDriver = new EdgeDriver(edgeOptions);
-                    break;
-
-                default:
-                    throw new ArgumentException("Browser not supported: " + browser);
-            }
-
-            localDriver.Manage().Window.Maximize();
-            localDriver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
-
-            SetDriver(localDriver);
-            return localDriver;
+            driver.Value = new ChromeDriver(chromeOptions);
+            driver.Value.Manage().Window.Maximize();
+            driver.Value.Manage().Timeouts().ImplicitWait = TimeSpan.Zero;
+            
+            return driver.Value;
         }
 
         public static void QuitDriver()
         {
-            if (driver.Value != null)
-            {
-                driver.Value.Quit();
-                driver.Value.Dispose(); // release resources 
-              
-            }
+            if (driver.Value == null) 
+             return;
+
+            try { driver.Value.Quit(); 
+                  driver.Value.Dispose(); 
+                } 
+            catch 
+                { 
+                }
+            driver.Value = null;
         }
     }
 }

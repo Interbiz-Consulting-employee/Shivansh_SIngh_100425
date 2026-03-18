@@ -1,4 +1,4 @@
-﻿using OpenQA.Selenium;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
@@ -7,30 +7,31 @@ namespace ReqnrollBDDProject.Pages
 {
     public class BasePage
     {
-        
-        protected readonly IWebDriver driver;     // readonly prevents accidental driver reassignment
-        protected readonly WebDriverWait wait;     // explicit wait instance per page object (safe for parallel execution)
+        protected IWebDriver Driver => ReqnrollBDDProject.Drivers.DriverManager.Driver;
+        protected WebDriverWait Wait { get; }
 
-
-        public BasePage(IWebDriver driver)  //in parallel tests, each scenario/thread has its own WebDriver instance (from ThreadLocal or Hooks)
+        public BasePage(int waitTimeInSeconds = 30)
         {
-            this.driver = driver; 
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+            Wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(waitTimeInSeconds));
         }
 
-        protected IWebElement WaitForElementVisible(By locator)
-        {
-            return wait.Until(ExpectedConditions.ElementIsVisible(locator));
-        }
+        protected IWebElement WaitForElementVisible(By locator) =>
+            Wait.Until(ExpectedConditions.ElementIsVisible(locator));
 
-        protected IWebElement WaitForElementClickable(By locator)
-        {
-            return wait.Until(ExpectedConditions.ElementToBeClickable(locator));
-        }
+        protected IWebElement WaitForElementClickable(By locator) =>
+            Wait.Until(ExpectedConditions.ElementToBeClickable(locator));
 
         protected void ClickElement(By locator)
         {
-            WaitForElementClickable(locator).Click();
+            try
+            {
+                WaitForElementClickable(locator).Click();
+            }
+            catch
+            {
+                ((IJavaScriptExecutor)Driver)
+                    .ExecuteScript("arguments[0].click();", WaitForElementVisible(locator));
+            }
         }
 
         protected void EnterText(By locator, string text)
@@ -40,22 +41,20 @@ namespace ReqnrollBDDProject.Pages
             element.SendKeys(text);
         }
 
-        protected string GetText(By locator)
-        {
-            return WaitForElementVisible(locator).Text;
-        }
+        protected string GetText(By locator) => WaitForElementVisible(locator).Text;
 
         public void NavigateToUrl(string url)
         {
-            driver.Navigate().GoToUrl(url);
+            Driver.Navigate().GoToUrl(url);
+            WaitForPageLoad();
         }
 
         protected void WaitForPageLoad()
         {
-            wait.Until(driver =>
-                ((IJavaScriptExecutor)driver)
-                .ExecuteScript("return document.readyState")
-                .Equals("complete"));
+            Wait.Until(d =>
+                ((IJavaScriptExecutor)d).ExecuteScript("return document.readyState").Equals("complete"));
         }
+
+        protected bool IsElementPresent(By locator) => Driver.FindElements(locator).Count > 0;
     }
 }

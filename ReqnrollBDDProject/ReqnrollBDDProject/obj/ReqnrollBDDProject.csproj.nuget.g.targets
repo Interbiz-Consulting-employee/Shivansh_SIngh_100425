@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)system.text.json\8.0.5\buildTransitive\net6.0\System.Text.Json.targets" Condition="Exists('$(NuGetPackageRoot)system.text.json\8.0.5\buildTransitive\net6.0\System.Text.Json.targets')" />
     <Import Project="$(NuGetPackageRoot)selenium.webdriver\4.11.0\buildTransitive\Selenium.WebDriver.targets" Condition="Exists('$(NuGetPackageRoot)selenium.webdriver\4.11.0\buildTransitive\Selenium.WebDriver.targets')" />
     <Import Project="$(NuGetPackageRoot)selenium.webdriver.chromedriver\145.0.7632.11700\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('$(NuGetPackageRoot)selenium.webdriver.chromedriver\145.0.7632.11700\build\Selenium.WebDriver.ChromeDriver.targets')" />
     <Import Project="$(NuGetPackageRoot)reqnroll.tools.msbuild.generation\3.3.3\build\Reqnroll.Tools.MsBuild.Generation.targets" Condition="Exists('$(NuGetPackageRoot)reqnroll.tools.msbuild.generation\3.3.3\build\Reqnroll.Tools.MsBuild.Generation.targets')" />

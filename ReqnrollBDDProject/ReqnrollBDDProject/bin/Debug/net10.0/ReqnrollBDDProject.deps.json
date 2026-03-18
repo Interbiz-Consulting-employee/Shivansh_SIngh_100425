@@ -8,13 +8,15 @@
     ".NETCoreApp,Version=v10.0": {
       "ReqnrollBDDProject/1.0.0": {
         "dependencies": {
+          "ExtentReports.signed": "3.1.3",
           "Microsoft.NET.Test.Sdk": "17.7.0",
           "NUnit": "3.13.3",
           "Reqnroll": "3.3.3",
           "Reqnroll.NUnit": "3.3.3",
           "Selenium.Support": "4.11.0",
           "Selenium.WebDriver": "4.11.0",
-          "SeleniumExtras.WaitHelpers": "1.0.2"
+          "SeleniumExtras.WaitHelpers": "1.0.2",
+          "System.Configuration.ConfigurationManager": "8.0.0"
         },
         "runtime": {
           "ReqnrollBDDProject.dll": {}
@@ -47,6 +49,22 @@
           }
         }
       },
+      "ExtentReports.signed/3.1.3": {
+        "dependencies": {
+          "HtmlAgilityPack": "1.4.9.5",
+          "MongoDB.Bson.signed": "2.4.0",
+          "MongoDB.Driver.Core.signed": "2.4.0",
+          "MongoDB.Driver.signed": "2.4.0",
+          "Newtonsoft.Json": "13.0.1",
+          "RazorEngine": "3.9.0"
+        },
+        "runtime": {
+          "lib/ExtentReports.dll": {
+            "assemblyVersion": "3.1.3.0",
+            "fileVersion": "3.1.3.0"
+          }
+        }
+      },
       "Gherkin/35.0.0": {
         "dependencies": {
           "Cucumber.Messages": "30.1.0"
@@ -55,6 +73,22 @@
           "lib/netstandard2.0/Gherkin.dll": {
             "assemblyVersion": "35.0.0.0",
             "fileVersion": "35.0.0.0"
+          }
+        }
+      },
+      "HtmlAgilityPack/1.4.9.5": {
+        "runtime": {
+          "lib/Net45/HtmlAgilityPack.dll": {
+            "assemblyVersion": "1.4.9.5",
+            "fileVersion": "1.4.9.5"
+          }
+        }
+      },
+      "Microsoft.AspNet.Razor/3.0.0": {
+        "runtime": {
+          "lib/net45/System.Web.Razor.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.0.11001.0"
           }
         }
       },
@@ -334,6 +368,37 @@
           }
         }
       },
+      "MongoDB.Bson.signed/2.4.0": {
+        "runtime": {
+          "lib/netstandard1.5/MongoDB.Bson.dll": {
+            "assemblyVersion": "2.4.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "MongoDB.Driver.Core.signed/2.4.0": {
+        "dependencies": {
+          "MongoDB.Bson.signed": "2.4.0"
+        },
+        "runtime": {
+          "lib/netstandard1.5/MongoDB.Driver.Core.dll": {
+            "assemblyVersion": "2.4.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
+      "MongoDB.Driver.signed/2.4.0": {
+        "dependencies": {
+          "MongoDB.Bson.signed": "2.4.0",
+          "MongoDB.Driver.Core.signed": "2.4.0"
+        },
+        "runtime": {
+          "lib/netstandard1.5/MongoDB.Driver.dll": {
+            "assemblyVersion": "2.4.0.0",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      },
       "Newtonsoft.Json/13.0.1": {
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
@@ -355,6 +420,17 @@
           "lib/netstandard2.0/nunit.framework.dll": {
             "assemblyVersion": "3.13.3.0",
             "fileVersion": "3.13.3.0"
+          }
+        }
+      },
+      "RazorEngine/3.9.0": {
+        "dependencies": {
+          "Microsoft.AspNet.Razor": "3.0.0"
+        },
+        "runtime": {
+          "lib/net45/RazorEngine.dll": {
+            "assemblyVersion": "3.9.0.0",
+            "fileVersion": "3.9.0.0"
           }
         }
       },
@@ -422,6 +498,48 @@
             "fileVersion": "1.0.2.0"
           }
         }
+      },
+      "System.Configuration.ConfigurationManager/8.0.0": {
+        "dependencies": {
+          "System.Diagnostics.EventLog": "8.0.0",
+          "System.Security.Cryptography.ProtectedData": "8.0.0"
+        },
+        "runtime": {
+          "lib/net8.0/System.Configuration.ConfigurationManager.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
+          }
+        }
+      },
+      "System.Diagnostics.EventLog/8.0.0": {
+        "runtime": {
+          "lib/net8.0/System.Diagnostics.EventLog.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/net8.0/System.Diagnostics.EventLog.Messages.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win/lib/net8.0/System.Diagnostics.EventLog.dll": {
+            "rid": "win",
+            "assetType": "runtime",
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
+          }
+        }
+      },
+      "System.Security.Cryptography.ProtectedData/8.0.0": {
+        "runtime": {
+          "lib/net8.0/System.Security.Cryptography.ProtectedData.dll": {
+            "assemblyVersion": "8.0.0.0",
+            "fileVersion": "8.0.23.53103"
+          }
+        }
       }
     }
   },
@@ -452,12 +570,33 @@
       "path": "cucumber.messages/30.1.0",
       "hashPath": "cucumber.messages.30.1.0.nupkg.sha512"
     },
+    "ExtentReports.signed/3.1.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0zUQF5c0BA/5yVv5GvOjBkicB0Br8ctHUy1BNGWzr3QbBAShMzqUiNC36gzh440bE1X6JZbL5l1m+NMYKR0kzg==",
+      "path": "extentreports.signed/3.1.3",
+      "hashPath": "extentreports.signed.3.1.3.nupkg.sha512"
+    },
     "Gherkin/35.0.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-ha+QNevQsXEESbzazUceHTCtKOjoBTBa8kLFdKpu6vSEbb3UMt3a55RG78tIoU/C4qzIqX3jQxaIdIcYGO+IWQ==",
       "path": "gherkin/35.0.0",
       "hashPath": "gherkin.35.0.0.nupkg.sha512"
+    },
+    "HtmlAgilityPack/1.4.9.5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-zk7zsIaPkyBvYoVDsnx52SbKtvcmo2bcgNBshhSG++RnHMYoh0dqxRuQSznY+w6luiqR35OiHTk1L73SUAGKLw==",
+      "path": "htmlagilitypack/1.4.9.5",
+      "hashPath": "htmlagilitypack.1.4.9.5.nupkg.sha512"
+    },
+    "Microsoft.AspNet.Razor/3.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-mU1W0PRd1uQAb+triRGp51YYkw26RQ9q1tWPX57eHqxDqjx1smRHhejQhhnoAGr3bZDkl8AoUxegGR3tNM+YKA==",
+      "path": "microsoft.aspnet.razor/3.0.0",
+      "hashPath": "microsoft.aspnet.razor.3.0.0.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/9.0.6": {
       "type": "package",
@@ -501,6 +640,27 @@
       "path": "microsoft.testplatform.testhost/17.7.0",
       "hashPath": "microsoft.testplatform.testhost.17.7.0.nupkg.sha512"
     },
+    "MongoDB.Bson.signed/2.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-baKnLTBW1k4ZI/pdL8lgLM0w04EfBeqLk9/tgKcs2B3Uw9SiRulmLQwaJVSuxavkshLO0hLGnwsiIW8Oh1UCtw==",
+      "path": "mongodb.bson.signed/2.4.0",
+      "hashPath": "mongodb.bson.signed.2.4.0.nupkg.sha512"
+    },
+    "MongoDB.Driver.Core.signed/2.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-kBT6rNuoea3zjDINzTBmj0Nn9jhg+uup7TgsrxI6qR6frvMlNc1RhRouNGke3C3iRem8c6TKIEPLRS/2ajwFBg==",
+      "path": "mongodb.driver.core.signed/2.4.0",
+      "hashPath": "mongodb.driver.core.signed.2.4.0.nupkg.sha512"
+    },
+    "MongoDB.Driver.signed/2.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-IAC+P6GLqnOUGR1fZ0oOWiRANFAOVz3d2B3t3exJGP8yW18IKpNlH05w/q4AHnSC8cX2NO8VyEVG2R8i7Iy9DA==",
+      "path": "mongodb.driver.signed/2.4.0",
+      "hashPath": "mongodb.driver.signed.2.4.0.nupkg.sha512"
+    },
     "Newtonsoft.Json/13.0.1": {
       "type": "package",
       "serviceable": true,
@@ -521,6 +681,13 @@
       "sha512": "sha512-KNPDpls6EfHwC3+nnA67fh5wpxeLb3VLFAfLxrug6JMYDLHH6InaQIWR7Sc3y75d/9IKzMksH/gi08W7XWbmnQ==",
       "path": "nunit/3.13.3",
       "hashPath": "nunit.3.13.3.nupkg.sha512"
+    },
+    "RazorEngine/3.9.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-J/Y0wkyeilYPNFcW9xtGpRbFgNg0v6kDS/5Lq9MiI31bQxHBXiaKcOYrGK6NrAeX/OJuUsjXhcRINggSfwvlMg==",
+      "path": "razorengine/3.9.0",
+      "hashPath": "razorengine.3.9.0.nupkg.sha512"
     },
     "Reqnroll/3.3.3": {
       "type": "package",
@@ -556,6 +723,27 @@
       "sha512": "sha512-de7m30nkZZLkfCncYBdluUpM27AR/Vkk4kiA4HRQbV+fZI3ps4qGIeJCuj8TAMXdMfQik5Rno8xPnFBIod+ebg==",
       "path": "seleniumextras.waithelpers/1.0.2",
       "hashPath": "seleniumextras.waithelpers.1.0.2.nupkg.sha512"
+    },
+    "System.Configuration.ConfigurationManager/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-JlYi9XVvIREURRUlGMr1F6vOFLk7YSY4p1vHo4kX3tQ0AGrjqlRWHDi66ImHhy6qwXBG3BJ6Y1QlYQ+Qz6Xgww==",
+      "path": "system.configuration.configurationmanager/8.0.0",
+      "hashPath": "system.configuration.configurationmanager.8.0.0.nupkg.sha512"
+    },
+    "System.Diagnostics.EventLog/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fdYxcRjQqTTacKId/2IECojlDSFvp7LP5N78+0z/xH7v/Tuw5ZAxu23Y6PTCRinqyu2ePx+Gn1098NC6jM6d+A==",
+      "path": "system.diagnostics.eventlog/8.0.0",
+      "hashPath": "system.diagnostics.eventlog.8.0.0.nupkg.sha512"
+    },
+    "System.Security.Cryptography.ProtectedData/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+TUFINV2q2ifyXauQXRwy4CiBhqvDEDZeVJU7qfxya4aRYOKzVBpN+4acx25VcPB9ywUN6C0n8drWl110PhZEg==",
+      "path": "system.security.cryptography.protecteddata/8.0.0",
+      "hashPath": "system.security.cryptography.protecteddata.8.0.0.nupkg.sha512"
     }
   }
 }

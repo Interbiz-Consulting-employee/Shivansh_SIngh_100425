@@ -3,36 +3,16 @@
   "WorkspaceRootPath": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|c:\\training\\reqnrollbddproject2\\reqnrollbddproject\\reqnrollbddproject\\reqnrollbddproject\\features\\login.feature||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|solutionrelative:reqnrollbddproject\\features\\login.feature||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|c:\\training\\reqnrollbddproject2\\reqnrollbddproject\\reqnrollbddproject\\reqnrollbddproject\\drivers\\drivermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|solutionrelative:reqnrollbddproject\\drivers\\drivermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|c:\\training\\reqnrollbddproject2\\reqnrollbddproject\\reqnrollbddproject\\reqnrollbddproject\\steps\\loginsteps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|solutionrelative:reqnrollbddproject\\steps\\loginsteps.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|c:\\training\\reqnrollbddproject2\\reqnrollbddproject\\reqnrollbddproject\\reqnrollbddproject\\pages\\loginpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|solutionrelative:reqnrollbddproject\\pages\\loginpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|c:\\training\\reqnrollbddproject2\\reqnrollbddproject\\reqnrollbddproject\\reqnrollbddproject\\pages\\basepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|solutionrelative:reqnrollbddproject\\pages\\basepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|c:\\training\\reqnrollbddproject2\\reqnrollbddproject\\reqnrollbddproject\\reqnrollbddproject\\utilities\\extentreportmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|solutionrelative:reqnrollbddproject\\utilities\\extentreportmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|c:\\training\\reqnrollbddproject2\\reqnrollbddproject\\reqnrollbddproject\\reqnrollbddproject\\hooks\\scenariohooks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|solutionrelative:reqnrollbddproject\\hooks\\scenariohooks.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|c:\\training\\reqnrollbddproject2\\reqnrollbddproject\\reqnrollbddproject\\reqnrollbddproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|solutionrelative:reqnrollbddproject\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|c:\\training\\reqnrollbddproject2\\reqnrollbddproject\\reqnrollbddproject\\reqnrollbddproject\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|solutionrelative:reqnrollbddproject\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|c:\\training\\reqnrollbddproject2\\reqnrollbddproject\\reqnrollbddproject\\reqnrollbddproject\\utilities\\screenshothelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7BD4BB4F-F346-CF9E-3FEB-90402C59D864}|ReqnrollBDDProject\\ReqnrollBDDProject.csproj|solutionrelative:reqnrollbddproject\\utilities\\screenshothelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,100 +34,40 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "AssemblyInfo.cs",
-              "DocumentMoniker": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\AssemblyInfo.cs",
-              "RelativeDocumentMoniker": "ReqnrollBDDProject\\AssemblyInfo.cs",
-              "ToolTip": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\AssemblyInfo.cs",
-              "RelativeToolTip": "ReqnrollBDDProject\\AssemblyInfo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-09T09:39:17.89Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\Program.cs",
-              "RelativeDocumentMoniker": "ReqnrollBDDProject\\Program.cs",
-              "ToolTip": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\Program.cs",
-              "RelativeToolTip": "ReqnrollBDDProject\\Program.cs",
+              "DocumentIndex": 2,
+              "Title": "ScreenshotHelper.cs",
+              "DocumentMoniker": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\Utilities\\ScreenshotHelper.cs",
+              "RelativeDocumentMoniker": "ReqnrollBDDProject\\Utilities\\ScreenshotHelper.cs",
+              "ToolTip": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\Utilities\\ScreenshotHelper.cs",
+              "RelativeToolTip": "ReqnrollBDDProject\\Utilities\\ScreenshotHelper.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-09T09:39:17.139Z"
+              "WhenOpened": "2026-03-16T05:04:40.067Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "BasePage.cs",
-              "DocumentMoniker": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\Pages\\BasePage.cs",
-              "RelativeDocumentMoniker": "ReqnrollBDDProject\\Pages\\BasePage.cs",
-              "ToolTip": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\Pages\\BasePage.cs",
-              "RelativeToolTip": "ReqnrollBDDProject\\Pages\\BasePage.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAvAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-09T09:34:19.467Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "LoginPage.cs",
-              "DocumentMoniker": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\Pages\\LoginPage.cs",
-              "RelativeDocumentMoniker": "ReqnrollBDDProject\\Pages\\LoginPage.cs",
-              "ToolTip": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\Pages\\LoginPage.cs",
-              "RelativeToolTip": "ReqnrollBDDProject\\Pages\\LoginPage.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADUAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-09T09:33:25.561Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "LoginSteps.cs",
-              "DocumentMoniker": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\Steps\\LoginSteps.cs",
-              "RelativeDocumentMoniker": "ReqnrollBDDProject\\Steps\\LoginSteps.cs",
-              "ToolTip": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\Steps\\LoginSteps.cs",
-              "RelativeToolTip": "ReqnrollBDDProject\\Steps\\LoginSteps.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAgwBEAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-09T09:33:11.22Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "ScenarioHooks.cs",
               "DocumentMoniker": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\Hooks\\ScenarioHooks.cs",
               "RelativeDocumentMoniker": "ReqnrollBDDProject\\Hooks\\ScenarioHooks.cs",
               "ToolTip": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\Hooks\\ScenarioHooks.cs",
               "RelativeToolTip": "ReqnrollBDDProject\\Hooks\\ScenarioHooks.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAIwBkAAAA6AAAAAAAAAA==",
+              "ViewState": "AgIAACwAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-09T09:32:41.259Z"
+              "WhenOpened": "2026-03-13T04:42:20.658Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Login.feature",
-              "DocumentMoniker": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\Features\\Login.feature",
-              "RelativeDocumentMoniker": "ReqnrollBDDProject\\Features\\Login.feature",
-              "ToolTip": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\Features\\Login.feature",
-              "RelativeToolTip": "ReqnrollBDDProject\\Features\\Login.feature",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA/AAAAAAAAAA==",
-              "Icon": "00000000-0000-0000-0000-000000000000.000000|iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJXSURBVDhPdVNfSFNhFP/duznd5tRy5N2o1BwoCVJZD0FgulCIXiJqIyiCKIKeequnKGgQ\u002BBSBT770oNtDgv15CKKCGkRgD/WQZCqBcnfnarmcbtO72znfvddNqx/8zs537nd\u002B3znfdybhXxhXfJCwn7x24gb589AxjfOpvPhuwzCMrQIGMaFcInuDyAJOIqNE/EyMIZqaEBELFYG4Ukd2mHidl7WyC8VyCbIkC39NL3CYcROSNIyIqvNCFiETV4nX2Olu7MS78CS6Gzpxse0s3gxM0EmbZ92m0k9YviUQV5rI3iU6drqakFtfQat3D476D\u002BNkIIzVjTXqjvsTcBPv4WlQKNo9DhEbW7278br/MV5qb9H36jR\u002Bln4hmfmAH8WsuauCQ8iX99HvrN3CATaLqypG58bglBzQCkuCX3IzSBczYlMV\u002BHSRYwuISnSjjO/5BZFU0IviAyNU34ZYzy0MKsetiICXjS0wxybka8fD3hgGWo7BX9uMZtcOBOp2wUEVDSn9GOm9LzZbWGBjXm1C6aA7\u002Bko3LXfQacvrOSTDT/BgZhRdDSF0\u002BUI4k7wMj8MDtaBxBr2p0YKoljMriKRmyT7im/62Mg9fTT09tYyP2U94n5lC0K2I9qxkxhgns1M9SEGyz4gHecnPmS0ti0HyON34TU9rIQ3J6ENEm\u002BZFRYAxrvgpMkLeKSJP5nbwfyFC4/zcXG4XYCQCNdTJEeqRp/KCGRRIEa9QMle5ib8FbCQCgzSyL8hbJE7S1juIqmnxrQr/F4gH9lIVPeRNQdZVnFsy41sA/AGfbrS3fsL98AAAAABJRU5ErkJggg==",
-              "WhenOpened": "2026-03-09T09:32:33.001Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DriverManager.cs",
-              "DocumentMoniker": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\Drivers\\DriverManager.cs",
-              "RelativeDocumentMoniker": "ReqnrollBDDProject\\Drivers\\DriverManager.cs",
-              "ToolTip": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\Drivers\\DriverManager.cs",
-              "RelativeToolTip": "ReqnrollBDDProject\\Drivers\\DriverManager.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAwwDUAAAA9AAAAAAAAAA==",
+              "Title": "ExtentReportManager.cs",
+              "DocumentMoniker": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\Utilities\\ExtentReportManager.cs",
+              "RelativeDocumentMoniker": "ReqnrollBDDProject\\Utilities\\ExtentReportManager.cs",
+              "ToolTip": "C:\\Training\\ReqnrollBDDProject2\\ReqnrollBDDProject\\ReqnrollBDDProject\\ReqnrollBDDProject\\Utilities\\ExtentReportManager.cs",
+              "RelativeToolTip": "ReqnrollBDDProject\\Utilities\\ExtentReportManager.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-09T04:40:55.11Z"
+              "WhenOpened": "2026-03-12T10:38:26.151Z",
+              "EditorCaption": ""
             }
           ]
         }
