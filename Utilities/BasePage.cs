@@ -1,51 +1,90 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
-using TestingDME.Utilities;
 using System;
 
 namespace TestingDME.Pages
 {
     public class BasePage
     {
-        protected IWebDriver driver;
-        public BasePage(IWebDriver driver) => this.driver = driver;
+        protected readonly IWebDriver driver;
+        private readonly WebDriverWait wait;
 
-        protected IWebElement WaitForElement(By loc) => WaitFactory.GetWait().Until(ExpectedConditions.ElementIsVisible(loc));
+        public BasePage(IWebDriver driver)
+        {
+            this.driver = driver;
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
+        }
 
-        // NEW ROBUST CLICK METHOD
+        protected IWebElement WaitForElement(By locator)
+        {
+            return wait.Until(ExpectedConditions.ElementIsVisible(locator));
+        }
+        protected IWebElement WaitForClickable(By locator)
+        {
+            return wait.Until(ExpectedConditions.ElementToBeClickable(locator));
+        }
+
         public void SafeClick(By locator)
         {
             try
             {
-                // Wait for it to be ready
-                var element = WaitFactory.GetWait().Until(ExpectedConditions.ElementToBeClickable(locator));
-
-                // Try scrolling first
-                ScrollToElement(locator);
-
-                // Attempt standard Selenium click
+                var element = WaitForClickable(locator);
+                ScrollToElement(element);
                 element.Click();
             }
             catch (Exception)
             {
-                // FALLBACK: Use JavaScript to force the click if intercepted or off-screen
-                IWebElement element = driver.FindElement(locator);
-                IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
-                js.ExecuteScript("arguments[0].click();", element);
+                var element = WaitForElement(locator);
+                JsClick(element);
             }
         }
 
-        public void Type(By loc, string txt)
+        public void Type(By locator, string text)
         {
-            var e = WaitForElement(loc);
-            e.Clear();
-            e.SendKeys(txt);
+            var element = WaitForElement(locator);
+            element.Clear();
+            element.SendKeys(text);
         }
 
-        public void ScrollToElement(By loc)
+        public void ClearAndType(By locator, string text)
         {
-            IWebElement element = driver.FindElement(loc);
-            ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView({block:'center'});", element);
+            var element = WaitForElement(locator);
+            element.Click();
+            element.SendKeys(Keys.Control + "a");
+            element.SendKeys(Keys.Backspace);
+            element.SendKeys(text);
+        }
+
+        public void ScrollToElement(By locator)
+        {
+            var element = WaitForElement(locator);
+            ScrollToElement(element);
+        }
+
+        public void ScrollToElement(IWebElement element)
+        {
+            ((IJavaScriptExecutor)driver)
+                .ExecuteScript("arguments[0].scrollIntoView({block:'center'});", element);
+        }
+
+        public void JsClick(IWebElement element)
+        {
+            ((IJavaScriptExecutor)driver)
+                .ExecuteScript("arguments[0].click();", element);
+        }
+
+        public bool IsElementVisible(By locator, int timeout = 5)
+        {
+            try
+            {
+                var shortWait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
+                return shortWait.Until(ExpectedConditions.ElementIsVisible(locator)).Displayed;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

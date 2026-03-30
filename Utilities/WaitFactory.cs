@@ -13,7 +13,7 @@ namespace TestingDME.Utilities
         {
             if (_wait.Value == null)
             {
-                _wait.Value = new WebDriverWait(DriverManager.GetDriver(), TimeSpan.FromSeconds(30));
+                _wait.Value = new WebDriverWait(DriverManager.GetDriver(), TimeSpan.FromSeconds(60));
                 _wait.Value.IgnoreExceptionTypes(typeof(NoSuchElementException), typeof(StaleElementReferenceException));
             }
             return _wait.Value;

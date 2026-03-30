@@ -1,54 +1,34 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\TestingDME\\",
+  "WorkspaceRootPath": "C:\\Users\\91964\\Downloads\\TestingDME 1\\TestingDME\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|e:\\testingdme\\pages\\orderpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|c:\\users\\91964\\downloads\\testingdme 1\\testingdme\\pages\\orderpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:pages\\orderpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|e:\\testingdme\\pages\\loginpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:pages\\loginpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|e:\\testingdme\\utilities\\basepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|c:\\users\\91964\\downloads\\testingdme 1\\testingdme\\utilities\\basepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:utilities\\basepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|e:\\testingdme\\utilities\\screenshothelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:utilities\\screenshothelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|e:\\testingdme\\tests\\ordertest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|c:\\users\\91964\\downloads\\testingdme 1\\testingdme\\tests\\ordertest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:tests\\ordertest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|e:\\testingdme\\tests\\testbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|c:\\users\\91964\\downloads\\testingdme 1\\testingdme\\tests\\testbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:tests\\testbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|e:\\testingdme\\utilities\\extenttestmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:utilities\\extenttestmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|e:\\testingdme\\utilities\\extentreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:utilities\\extentreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|e:\\testingdme\\utilities\\waitfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|c:\\users\\91964\\downloads\\testingdme 1\\testingdme\\utilities\\waitfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:utilities\\waitfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|e:\\testingdme\\utilities\\drivermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:utilities\\drivermanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|e:\\testingdme\\utilities\\configreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:utilities\\configreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|e:\\testingdme\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|c:\\users\\91964\\downloads\\testingdme 1\\testingdme\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|c:\\users\\91964\\downloads\\testingdme 1\\testingdme\\utilities\\configreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:utilities\\configreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,166 +38,101 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 5,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ScreenshotHelper.cs",
-              "DocumentMoniker": "E:\\TestingDME\\Utilities\\ScreenshotHelper.cs",
-              "RelativeDocumentMoniker": "Utilities\\ScreenshotHelper.cs",
-              "ToolTip": "E:\\TestingDME\\Utilities\\ScreenshotHelper.cs",
-              "RelativeToolTip": "Utilities\\ScreenshotHelper.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAcwAsAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-27T01:49:33.045Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BasePage.cs",
-              "DocumentMoniker": "E:\\TestingDME\\Utilities\\BasePage.cs",
-              "RelativeDocumentMoniker": "Utilities\\BasePage.cs",
-              "ToolTip": "E:\\TestingDME\\Utilities\\BasePage.cs",
-              "RelativeToolTip": "Utilities\\BasePage.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAswDIAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-26T18:55:49.952Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "LoginPage.cs",
-              "DocumentMoniker": "E:\\TestingDME\\Pages\\LoginPage.cs",
-              "RelativeDocumentMoniker": "Pages\\LoginPage.cs",
-              "ToolTip": "E:\\TestingDME\\Pages\\LoginPage.cs",
-              "RelativeToolTip": "Pages\\LoginPage.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAUwBQAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-26T18:41:04.706Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "OrderPage.cs",
-              "DocumentMoniker": "E:\\TestingDME\\Pages\\OrderPage.cs",
-              "RelativeDocumentMoniker": "Pages\\OrderPage.cs",
-              "ToolTip": "E:\\TestingDME\\Pages\\OrderPage.cs",
-              "RelativeToolTip": "Pages\\OrderPage.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAgwAsAAABbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-26T18:38:02.717Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "TestBase.cs",
-              "DocumentMoniker": "E:\\TestingDME\\Tests\\TestBase.cs",
-              "RelativeDocumentMoniker": "Tests\\TestBase.cs",
-              "ToolTip": "E:\\TestingDME\\Tests\\TestBase.cs",
-              "RelativeToolTip": "Tests\\TestBase.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAYwCMAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-26T19:09:17.489Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "OrderTest.cs",
-              "DocumentMoniker": "E:\\TestingDME\\Tests\\OrderTest.cs",
-              "RelativeDocumentMoniker": "Tests\\OrderTest.cs",
-              "ToolTip": "E:\\TestingDME\\Tests\\OrderTest.cs",
-              "RelativeToolTip": "Tests\\OrderTest.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAYwBkAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-26T18:38:20.663Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ExtentTestManager.cs",
-              "DocumentMoniker": "E:\\TestingDME\\Utilities\\ExtentTestManager.cs",
-              "RelativeDocumentMoniker": "Utilities\\ExtentTestManager.cs",
-              "ToolTip": "E:\\TestingDME\\Utilities\\ExtentTestManager.cs",
-              "RelativeToolTip": "Utilities\\ExtentTestManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "BasePage.cs",
+              "DocumentMoniker": "C:\\Users\\91964\\Downloads\\TestingDME 1\\TestingDME\\Utilities\\BasePage.cs",
+              "RelativeDocumentMoniker": "Utilities\\BasePage.cs",
+              "ToolTip": "C:\\Users\\91964\\Downloads\\TestingDME 1\\TestingDME\\Utilities\\BasePage.cs",
+              "RelativeToolTip": "Utilities\\BasePage.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAtwCwAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-27T01:49:01.236Z",
+              "WhenOpened": "2026-03-30T01:24:58.799Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ExtentReport.cs",
-              "DocumentMoniker": "E:\\TestingDME\\Utilities\\ExtentReport.cs",
-              "RelativeDocumentMoniker": "Utilities\\ExtentReport.cs",
-              "ToolTip": "E:\\TestingDME\\Utilities\\ExtentReport.cs",
-              "RelativeToolTip": "Utilities\\ExtentReport.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAYwBAAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-27T01:49:02.45Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "DriverManager.cs",
-              "DocumentMoniker": "E:\\TestingDME\\Utilities\\DriverManager.cs",
-              "RelativeDocumentMoniker": "Utilities\\DriverManager.cs",
-              "ToolTip": "E:\\TestingDME\\Utilities\\DriverManager.cs",
-              "RelativeToolTip": "Utilities\\DriverManager.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAYwCEAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-27T01:48:06.664Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ConfigReader.cs",
-              "DocumentMoniker": "E:\\TestingDME\\Utilities\\ConfigReader.cs",
-              "RelativeDocumentMoniker": "Utilities\\ConfigReader.cs",
-              "ToolTip": "E:\\TestingDME\\Utilities\\ConfigReader.cs",
-              "RelativeToolTip": "Utilities\\ConfigReader.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAgwCoAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-27T01:47:48.488Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "E:\\TestingDME\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "E:\\TestingDME\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAUwB4AAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-03-27T01:47:29.046Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 4,
               "Title": "WaitFactory.cs",
-              "DocumentMoniker": "E:\\TestingDME\\Utilities\\WaitFactory.cs",
+              "DocumentMoniker": "C:\\Users\\91964\\Downloads\\TestingDME 1\\TestingDME\\Utilities\\WaitFactory.cs",
               "RelativeDocumentMoniker": "Utilities\\WaitFactory.cs",
-              "ToolTip": "E:\\TestingDME\\Utilities\\WaitFactory.cs",
+              "ToolTip": "C:\\Users\\91964\\Downloads\\TestingDME 1\\TestingDME\\Utilities\\WaitFactory.cs",
               "RelativeToolTip": "Utilities\\WaitFactory.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAvwAwAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-26T19:08:35.839Z",
+              "WhenOpened": "2026-03-30T00:52:29.748Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\91964\\Downloads\\TestingDME 1\\TestingDME\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\91964\\Downloads\\TestingDME 1\\TestingDME\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABUAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-29T22:51:27.624Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ConfigReader.cs",
+              "DocumentMoniker": "C:\\Users\\91964\\Downloads\\TestingDME 1\\TestingDME\\Utilities\\ConfigReader.cs",
+              "RelativeDocumentMoniker": "Utilities\\ConfigReader.cs",
+              "ToolTip": "C:\\Users\\91964\\Downloads\\TestingDME 1\\TestingDME\\Utilities\\ConfigReader.cs",
+              "RelativeToolTip": "Utilities\\ConfigReader.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-29T22:51:22.157Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "OrderPage.cs",
+              "DocumentMoniker": "C:\\Users\\91964\\Downloads\\TestingDME 1\\TestingDME\\Pages\\OrderPage.cs",
+              "RelativeDocumentMoniker": "Pages\\OrderPage.cs",
+              "ToolTip": "C:\\Users\\91964\\Downloads\\TestingDME 1\\TestingDME\\Pages\\OrderPage.cs",
+              "RelativeToolTip": "Pages\\OrderPage.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAYwDgAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-29T22:38:36.92Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "OrderTest.cs",
+              "DocumentMoniker": "C:\\Users\\91964\\Downloads\\TestingDME 1\\TestingDME\\Tests\\OrderTest.cs",
+              "RelativeDocumentMoniker": "Tests\\OrderTest.cs",
+              "ToolTip": "C:\\Users\\91964\\Downloads\\TestingDME 1\\TestingDME\\Tests\\OrderTest.cs",
+              "RelativeToolTip": "Tests\\OrderTest.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAtwBwAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-29T22:38:15.911Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TestBase.cs",
+              "DocumentMoniker": "C:\\Users\\91964\\Downloads\\TestingDME 1\\TestingDME\\Tests\\TestBase.cs",
+              "RelativeDocumentMoniker": "Tests\\TestBase.cs",
+              "ToolTip": "C:\\Users\\91964\\Downloads\\TestingDME 1\\TestingDME\\Tests\\TestBase.cs",
+              "RelativeToolTip": "Tests\\TestBase.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-29T22:38:06.659Z",
               "EditorCaption": ""
             }
           ]

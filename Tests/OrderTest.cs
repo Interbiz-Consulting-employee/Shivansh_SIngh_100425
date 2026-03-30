@@ -19,8 +19,14 @@ namespace TestingDME.Tests
 
             string orderCode = order.CreateFullOrder();
             TestContext.WriteLine($"Order Created: {orderCode}");
-
-            Assert.IsNotEmpty(orderCode, "Order code was not captured!");
+            if (order.OrderExists(orderCode))
+            {
+                Assert.Pass("Order found in UI");
+            }
+            else
+            {
+                Assert.Fail("Order not found in UI");
+            }
         }
     }
 }

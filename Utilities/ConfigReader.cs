@@ -23,7 +23,6 @@ namespace TestingDME.Utilities
         public static string NPI => config["testdata:npi"];
         public static string OrgName => config["testdata:organization"];
 
-        // Patient Data
         public static string PFirstName => config["testdata:patient:firstName"];
         public static string PLastName => config["testdata:patient:lastName"];
         public static string PDOB => config["testdata:patient:dob"];
@@ -34,7 +33,7 @@ namespace TestingDME.Utilities
         public static string PState => config["testdata:patient:state"];
         public static string PZip => config["testdata:patient:zip"];
 
-        // Order Data
+      
         public static string Insurance => config["testdata:order:insurance"];
         public static string PlanType => config["testdata:order:planType"];
         public static string MemberId => config["testdata:order:memberId"];

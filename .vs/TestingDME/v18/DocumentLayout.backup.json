@@ -1,0 +1,144 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Training\\TestingDME 1\\TestingDME\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|c:\\training\\testingdme 1\\testingdme\\pages\\orderpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:pages\\orderpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|c:\\training\\testingdme 1\\testingdme\\tests\\ordertest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:tests\\ordertest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|c:\\training\\testingdme 1\\testingdme\\utilities\\basepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:utilities\\basepage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|c:\\training\\testingdme 1\\testingdme\\utilities\\waitfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:utilities\\waitfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|c:\\training\\testingdme 1\\testingdme\\tests\\testbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:tests\\testbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|c:\\training\\testingdme 1\\testingdme\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|c:\\training\\testingdme 1\\testingdme\\utilities\\configreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8099095-B532-4D74-9AD9-665B93865A3B}|TestingDME.csproj|solutionrelative:utilities\\configreader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BasePage.cs",
+              "DocumentMoniker": "C:\\Training\\TestingDME 1\\TestingDME\\Utilities\\BasePage.cs",
+              "RelativeDocumentMoniker": "Utilities\\BasePage.cs",
+              "ToolTip": "C:\\Training\\TestingDME 1\\TestingDME\\Utilities\\BasePage.cs",
+              "RelativeToolTip": "Utilities\\BasePage.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAIA9wCcAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T13:52:37.169Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "WaitFactory.cs",
+              "DocumentMoniker": "C:\\Training\\TestingDME 1\\TestingDME\\Utilities\\WaitFactory.cs",
+              "RelativeDocumentMoniker": "Utilities\\WaitFactory.cs",
+              "ToolTip": "C:\\Training\\TestingDME 1\\TestingDME\\Utilities\\WaitFactory.cs",
+              "RelativeToolTip": "Utilities\\WaitFactory.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T13:52:37.219Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Training\\TestingDME 1\\TestingDME\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Training\\TestingDME 1\\TestingDME\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABUAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-28T13:52:37.219Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ConfigReader.cs",
+              "DocumentMoniker": "C:\\Training\\TestingDME 1\\TestingDME\\Utilities\\ConfigReader.cs",
+              "RelativeDocumentMoniker": "Utilities\\ConfigReader.cs",
+              "ToolTip": "C:\\Training\\TestingDME 1\\TestingDME\\Utilities\\ConfigReader.cs",
+              "RelativeToolTip": "Utilities\\ConfigReader.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T13:52:37.219Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "OrderPage.cs",
+              "DocumentMoniker": "C:\\Training\\TestingDME 1\\TestingDME\\Pages\\OrderPage.cs",
+              "RelativeDocumentMoniker": "Pages\\OrderPage.cs",
+              "ToolTip": "C:\\Training\\TestingDME 1\\TestingDME\\Pages\\OrderPage.cs",
+              "RelativeToolTip": "Pages\\OrderPage.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAvwBUAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T13:52:37.236Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "OrderTest.cs",
+              "DocumentMoniker": "C:\\Training\\TestingDME 1\\TestingDME\\Tests\\OrderTest.cs",
+              "RelativeDocumentMoniker": "Tests\\OrderTest.cs",
+              "ToolTip": "C:\\Training\\TestingDME 1\\TestingDME\\Tests\\OrderTest.cs",
+              "RelativeToolTip": "Tests\\OrderTest.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAawBMAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T13:52:37.253Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TestBase.cs",
+              "DocumentMoniker": "C:\\Training\\TestingDME 1\\TestingDME\\Tests\\TestBase.cs",
+              "RelativeDocumentMoniker": "Tests\\TestBase.cs",
+              "ToolTip": "C:\\Training\\TestingDME 1\\TestingDME\\Tests\\TestBase.cs",
+              "RelativeToolTip": "Tests\\TestBase.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T13:52:37.253Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
